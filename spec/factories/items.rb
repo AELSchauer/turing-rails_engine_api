@@ -3,6 +3,6 @@ FactoryGirl.define do
     name "MyString"
     description "MyString"
     unit_price "9.99"
-    merchant nil
+    merchant 
   end
 end
