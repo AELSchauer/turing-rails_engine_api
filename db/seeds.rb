@@ -1,69 +1,125 @@
 require 'csv'
 require 'date'
 
-file = "db/csv/customers.csv"
-csv_count = CSV.read(file).count - 1
-CSV.foreach(file, headers: true) do |row|
-  row.delete("id")
-  Customer.create(row.to_h)
-end
-object_count = Customer.count
-puts "Customer -- #{object_count} #{csv_count} #{object_count == csv_count}"
+class Uploader
 
-file = "db/csv/merchants.csv"
-csv_count = CSV.read(file).count - 1
-CSV.foreach(file, headers: true) do |row|
-  row.delete("id")
-  Merchant.create(row.to_h)
-end
-object_count = Merchant.count
-puts "Merchant -- #{object_count} #{csv_count} #{object_count == csv_count}"
+  def initialize(file_name)
+    @type = file_name
+    @file = "db/csv/#{file_name}.csv"
+    @object = object_index[file_name]
+  end
 
-file = "db/csv/invoices.csv"
-csv_count = CSV.read(file).count - 1
-CSV.foreach(file, headers: true) do |row|
-  merchant_id = row["merchant_id"]
-  row.delete("id")
-  row.delete("merchant_id")
-  Merchant.find(merchant_id).invoices.create(row.to_h)
-end
-object_count = Invoice.count
-puts "Invoice -- #{object_count} #{csv_count} #{object_count == csv_count}"
+  def object_index
+    {
+      customers: Customer,
+      invoices: Invoice,
+      invoice_items: InvoiceItem,
+      items: Item,
+      merchants: Merchant,
+      transactions: Transaction
+    }
+  end
 
-file = "db/csv/items.csv"
-csv_count = CSV.read(file).count - 1
-CSV.foreach(file, headers: true) do |row|
-  merchant_id = row["merchant_id"]
-  row["unit_price"] = (row["unit_price"].to_f / 1000).round(2)
-  row.delete("id")
-  row.delete("merchant_id")
-  Merchant.find(merchant_id).items.create(row.to_h)
-end
-object_count = Item.count
-puts "Item -- #{object_count} #{csv_count} #{object_count == csv_count}"
+  def table
+    CSV.read(@file, :headers => true)
+  end
 
-file = "db/csv/transactions.csv"
-csv_count = CSV.read(file).count - 1
-CSV.foreach(file, headers: true) do |row|
-  invoice_id = row["invoice_id"]
-  row.delete("id")
-  row.delete("invoice_id")
-  row["credit_card_expiration_date"] = Date.new(2018,3)
-  Invoice.find(invoice_id).transactions.create(row.to_h)
-end
-object_count = Transaction.count
-puts "Transaction -- #{object_count} #{csv_count} #{object_count == csv_count}"
+  def upload_table
+    upload_table = table
+    upload_table.delete("id")
+    upload_table
+  end
 
-file = "db/csv/invoice_items.csv"
-csv_count = CSV.read(file).count - 1
-CSV.foreach(file, headers: true) do |row|
-  invoice_id = row["invoice_id"]
-  item_id = row["item_id"]
-  row.delete("id")
-  row.delete("invoice_id")
-  row.delete("item_id")
-  row["unit_price"] = (row["unit_price"].to_f / 1000).round(2)
-  Invoice.find(invoice_id).invoice_items.create(row.to_h)
+  def table_count
+    @object.count.to_s.rjust(6)
+  end
+
+  def csv_count
+    table.count.to_s.rjust(6)
+  end
+
+  def upload
+    case @type
+    when :customers
+      upload_customer
+    when :invoices
+      upload_invoice
+    when :invoice_items
+      upload_invoice_item
+    when :items
+      upload_item
+    when :merchants
+      upload_merchant
+    when :transactions
+      upload_transaction
+    end
+    upload_complete
+  end
+
+  def convert_to_currency(number)
+    (number.to_f / 1000).round(2)
+  end
+
+  def name
+    @type.to_s.rjust(13)
+  end
+
+  def upload_complete
+    puts "#{name} -- #{table_count == csv_count ? "SUCCESS" : "FAILURE"} -- #{table_count} #{csv_count}"
+  end
+
+  def upload_customer
+    upload_table.each do |row|
+      Customer.create(row.to_h)
+    end
+  end
+
+  def upload_invoice
+    upload_table.each do |row|
+      merchant = Merchant.find(row["merchant_id"])
+      row.delete("merchant_id")
+      merchant.invoices.create(row.to_h)
+    end
+  end
+
+  def upload_invoice_item
+    upload_table.each do |row|
+      invoice = Invoice.find(row["invoice_id"])
+      row.delete("invoice_id")
+      row["unit_price"] = convert_to_currency(row["unit_price"])
+      invoice.invoice_items.create(row.to_h)
+    end
+  end
+
+  def upload_item
+    upload_table.each do |row|
+      merchant = Merchant.find(row["merchant_id"])
+      row.delete("merchant_id")
+      row["unit_price"] = convert_to_currency(row["unit_price"])
+      merchant.items.create(row.to_h)
+    end
+  end
+
+  def upload_merchant
+    upload_table.each do |row|
+      Merchant.create(row.to_h)
+    end
+  end
+
+  def upload_transaction
+    upload_table.each do |row|
+      invoice = Invoice.find(row["invoice_id"])
+      row.delete("invoice_id")
+      row["credit_card_expiration_date"] = Date.new(2018,3)
+      invoice.transactions.create(row.to_h)
+    end
+  end
 end
-object_count = InvoiceItem.count
-puts "InvoiceItem -- #{object_count} #{csv_count} #{object_count == csv_count}"
+
+
+files = [:customers, :merchants, :invoices, :items, :transactions, :invoice_items ]
+
+files.each do |file_name|
+  file = Uploader.new(file_name)
+  file.upload
+end
