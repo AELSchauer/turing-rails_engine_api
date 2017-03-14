@@ -3,6 +3,6 @@ FactoryGirl.define do
     credit_card_number 1
     credit_card_expiration_date "2017-03-13"
     result "MyString"
-    invoice nil
+    invoice
   end
 end
