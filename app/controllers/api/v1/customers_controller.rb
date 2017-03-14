@@ -6,4 +6,18 @@ class Api::V1::CustomersController < ApplicationController
   def show
     render json: Customer.find(params[:id])
   end
+
+  def find
+    render json: Customer.find_by(find_params)
+  end
+
+  private
+
+  def find_params
+    params.permit(customer_attributes)
+  end
+
+  def customer_attributes
+    Customer.new.attributes.keys
+  end
 end
