@@ -51,5 +51,21 @@ describe "Invoices API" do
       expect(result["id"]).to_not eq(invoice2.id)
       expect(result["id"]).to_not eq(invoice3.id)
     end
+
+    it "can find an invoice by its merchant id" do
+      merchant = create(:merchant)
+      invoice1 = create(:invoice, merchant: merchant)
+      invoice2 = create(:invoice, merchant: merchant)
+      invoice3 = create(:invoice)
+
+      get "/api/v1/invoices/find?merchant_id=#{merchant.id}"
+
+      result = JSON.parse(response.body)
+
+      expect(response).to be_success
+      expect(result["id"]).to eq(invoice1.id)
+      expect(result["id"]).to_not eq(invoice2.id)
+      expect(result["id"]).to_not eq(invoice3.id)
+    end
   end
 end
