@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  namespace :api do
+  namespace :api, defaults: { format: :json } do
     namespace :v1 do
       get "/customers/find", to: "customers#find"
       get "/customers/find_all", to: "customers#find_all"
@@ -13,6 +13,7 @@ Rails.application.routes.draw do
         resources :invoice, only: :index
         resources :transactions, only: :index
       end
+
       resources :invoices, only: [:index, :show] do
         resources :customer, only: :index
         resources :invoice_items, only: :index

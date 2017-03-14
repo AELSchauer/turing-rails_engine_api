@@ -21,4 +21,11 @@ describe "Merchants API" do
     expect(response).to be_success
     expect(merchant["id"]).to eq(id)
   end
+
+  it "serializes attributes" do
+    merchant_1 = Merchant.create(name: "amazon", created_at: "1234", updated_at: "5678")
+    expect(merchant_1).to have_attributes(:name => "amazon")
+    expect(merchant_1).to_not have_attributes(:updated_at => "1234")
+    expect(merchant_1).to_not have_attributes(:created_at => "5678")
+  end
 end
