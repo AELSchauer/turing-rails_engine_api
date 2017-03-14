@@ -31,11 +31,11 @@ class Uploader
   end
 
   def table_count
-    @object.count.to_s.rjust(6)
+    @object.count.to_s.rjust(5)
   end
 
   def csv_count
-    table.count.to_s.rjust(6)
+    table.count.to_s.rjust(5)
   end
 
   def upload
@@ -57,11 +57,11 @@ class Uploader
   end
 
   def convert_to_currency(number)
-    (number.to_f / 1000).round(2)
+    (number.to_f / 100).round(2)
   end
 
   def name
-    @type.to_s.rjust(13)
+    @type.to_s.rjust(14)
   end
 
   def upload_complete
@@ -117,7 +117,7 @@ class Uploader
 end
 
 
-files = [:customers, :merchants, :invoices, :items, :transactions, :invoice_items ]
+files = [:customers, :merchants, :invoices, :items, :transactions, :invoice_items]
 
 files.each do |file_name|
   file = Uploader.new(file_name)
