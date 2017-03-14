@@ -65,21 +65,22 @@ describe "Customers API" do
     end
 
     it "can find a customer by when it was created" do
-      datetime = "2017-01-01T00:00:00.000Z"
+      created = "2017-01-01T00:00:00.000Z"
+      updated = "2017-02-01T00:00:00.000Z"
       customer1 = Customer.create(
         first_name: "Luke",
         last_name: "Skywalker",
-        created_at: datetime,
-        updated_at: datetime
+        created_at: created,
+        updated_at: updated
       )
       customer2 = Customer.create(
         first_name: "Leia",
         last_name: "Organa",
-        created_at: datetime,
-        updated_at: datetime
+        created_at: created,
+        updated_at: updated
       )
 
-      get "/api/v1/customers/find?created_at=#{datetime}"
+      get "/api/v1/customers/find?created_at=#{created}"
 
       result = JSON.parse(response.body)
 
@@ -89,21 +90,22 @@ describe "Customers API" do
     end
 
     it "can find a customer by when it was updated" do
-      datetime = "2017-01-01T00:00:00.000Z"
+      created = "2017-01-01T00:00:00.000Z"
+      updated = "2017-02-01T00:00:00.000Z"
       customer1 = Customer.create(
         first_name: "Luke",
         last_name: "Skywalker",
-        created_at: datetime,
-        updated_at: datetime
+        created_at: created,
+        updated_at: updated
       )
       customer2 = Customer.create(
         first_name: "Leia",
         last_name: "Organa",
-        created_at: datetime,
-        updated_at: datetime
+        created_at: created,
+        updated_at: updated
       )
 
-      get "/api/v1/customers/find?updated_at=#{datetime}"
+      get "/api/v1/customers/find?updated_at=#{updated}"
 
       result = JSON.parse(response.body)
 
@@ -162,24 +164,25 @@ describe "Customers API" do
       end
     end
 
-    it "can find all customers by when they were created" do ||
-      datetime = "2017-01-01T00:00:00.000Z"
-      customer1 = Customer.create(
+    it "can find all customers by when they were created" do
+      created = "2017-01-01T00:00:00.000Z"
+      updated = "2017-02-01T00:00:00.000Z"
+      Customer.create(
         first_name: "Luke",
         last_name: "Skywalker",
-        created_at: datetime,
-        updated_at: datetime
+        created_at: created,
+        updated_at: updated
       )
-      customer2 = Customer.create(
+      Customer.create(
         first_name: "Leia",
         last_name: "Organa",
-        created_at: datetime,
-        updated_at: datetime
+        created_at: created,
+        updated_at: updated
       )
       create_list(:customer, 4)
 
 
-      get "/api/v1/customers/find_all?created_at=#{datetime}"
+      get "/api/v1/customers/find_all?created_at=#{created}"
 
       results = JSON.parse(response.body)
 
@@ -187,7 +190,43 @@ describe "Customers API" do
       expect(results.count).to eq(2)
 
       results.each do |result|
-        expect(result["created_at"]).to eq(datetime)
+        expect(result["created_at"]).to eq(created)
+      end
+    end
+
+    it "can find all customers by when they were updated" do
+      created = "2017-01-01T00:00:00.000Z"
+      updated = "2017-02-01T00:00:00.000Z"
+      Customer.create(
+        first_name: "Luke",
+        last_name: "Skywalker",
+        created_at: created,
+        updated_at: updated
+      )
+      Customer.create(
+        first_name: "Leia",
+        last_name: "Organa",
+        created_at: created,
+        updated_at: updated
+      )
+      Customer.create(
+        first_name: "Darth",
+        last_name: "Vader",
+        created_at: created,
+        updated_at: updated
+      )
+      create_list(:customer, 2)
+
+
+      get "/api/v1/customers/find_all?updated_at=#{updated}"
+
+      results = JSON.parse(response.body)
+
+      expect(response).to be_success
+      expect(results.count).to eq(3)
+
+      results.each do |result|
+        expect(result["updated_at"]).to eq(updated)
       end
     end
   end
