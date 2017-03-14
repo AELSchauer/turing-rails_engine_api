@@ -21,4 +21,13 @@ describe "InvoiceItems API" do
     expect(response).to be_success
     expect(invoice_item["id"]).to eq(id)
   end
+
+  it "serializes attributes" do
+    invoice_item_1 = InvoiceItem.create(quantity: 5, unit_price: 3.99, created_at: "1234", updated_at: "5678")
+    expect(invoice_item_1).to have_attributes(:quantity => 5)
+    expect(invoice_item_1).to have_attributes(:unit_price => 3.99)
+    expect(invoice_item_1).to_not have_attributes(:updated_at => "1234")
+    expect(invoice_item_1).to_not have_attributes(:created_at => "5678")
+  end
+
 end
