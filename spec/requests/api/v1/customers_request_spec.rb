@@ -230,4 +230,10 @@ describe "Customers API" do
       end
     end
   end
+
+  context "transactions method" do
+    it "can find all the transactions for a customer" do
+      customer = create()
+    end
+  end
 end
