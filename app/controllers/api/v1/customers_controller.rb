@@ -11,6 +11,10 @@ class Api::V1::CustomersController < ApplicationController
     render json: Customer.find_by(find_params)
   end
 
+  def find_all
+    render json: Customer.where(find_params)
+  end
+
   private
 
   def find_params
