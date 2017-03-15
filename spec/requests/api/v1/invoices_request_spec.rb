@@ -118,10 +118,10 @@ describe "Invoices API" do
 
   context "find all method" do
     it "can find all invoices by id" do
-      customer = create(:customer)
-      create_list(:customer, 4)
+      invoice = create(:invoice)
+      create_list(:invoice, 4)
 
-      get "/api/v1/customers/find_all?id=#{customer.id}"
+      get "/api/v1/invoices/find_all?id=#{invoice.id}"
 
       results = JSON.parse(response.body)
 
@@ -129,16 +129,16 @@ describe "Invoices API" do
       expect(results.count).to eq(1)
 
       results.each do |result|
-        expect(result["id"]).to eq(customer.id)
+        expect(result["id"]).to eq(invoice.id)
       end
     end
 
     it "can find all invoices by their customer id" do
       customer = create(:customer)
-      invoices = create_list(:customer, 3, customer: customer)
-      create_list(:customer, 4)
+      invoices = create_list(:invoice, 3, customer: customer)
+      create_list(:invoice, 4)
 
-      get "/api/v1/customers/find_all?customer_id=#{customer.id}"
+      get "/api/v1/invoices/find_all?customer_id=#{customer.id}"
 
       results = JSON.parse(response.body)
 
@@ -152,10 +152,10 @@ describe "Invoices API" do
 
     it "can find all invoices by their merchant id" do
       merchant = create(:merchant)
-      invoices = create_list(:customer, 5, merchant_id: merchant)
-      create_list(:customer, 4)
+      invoices = create_list(:invoice, 5, merchant: merchant)
+      create_list(:invoice, 4)
 
-      get "/api/v1/customers/find_all?merchant_id=#{merchant.id}"
+      get "/api/v1/invoices/find_all?merchant_id=#{merchant.id}"
 
       results = JSON.parse(response.body)
 
