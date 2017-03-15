@@ -119,7 +119,6 @@ describe "InvoiceItems API" do
         expect(result["unit_price"]).to eq("333.33")
       end
     end
-
   end
 
 end
