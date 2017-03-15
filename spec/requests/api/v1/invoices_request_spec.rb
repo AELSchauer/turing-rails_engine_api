@@ -115,4 +115,39 @@ describe "Invoices API" do
       expect(result["id"]).to_not eq(invoice2.id)
     end
   end
+
+  context "find all method" do
+    it "can find all invoices by id" do
+      customer = create(:customer)
+      create_list(:customer, 4)
+
+      get "/api/v1/customers/find_all?id=#{customer.id}"
+
+      results = JSON.parse(response.body)
+
+      expect(response).to be_success
+      expect(results.count).to eq(1)
+
+      results.each do |result|
+        expect(result["id"]).to eq(customer.id)
+      end
+    end
+
+    it "can find all invoices by their customer id" do
+      customer = create(:customer)
+      invoices = create_list(:customer, 3, customer: customer)
+      create_list(:customer, 4)
+
+      get "/api/v1/customers/find_all?customer_id=#{customer.id}"
+
+      results = JSON.parse(response.body)
+
+      expect(response).to be_success
+      expect(results.count).to eq(3)
+
+      results.each do |result|
+        expect(result["customer_id"]).to eq(customer.id)
+      end
+    end
+  end
 end
