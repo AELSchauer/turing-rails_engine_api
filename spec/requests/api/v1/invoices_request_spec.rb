@@ -183,5 +183,21 @@ describe "Invoices API" do
       expect(results.second["id"]).to eq(invoices.second.id)
     end
 
+    it "can find all invoices by when they were updated" do
+      updated = "2017-02-01T00:00:00.000Z"
+      invoices = create_list(:invoice, 3, updated_at: updated)
+      create_list(:invoice, 2)
+
+      get "/api/v1/invoices/find_all?updated_at=#{updated}"
+
+      results = JSON.parse(response.body)
+
+      expect(response).to be_success
+      expect(results.count).to eq(3)
+
+      expect(results.first["id"]).to eq(invoices.first.id)
+      expect(results.second["id"]).to eq(invoices.second.id)
+      expect(results.third["id"]).to eq(invoices.third.id)
+    end
   end
 end
