@@ -26,10 +26,11 @@ Rails.application.routes.draw do
       namespace :invoice_items do
         get "/find", to: "finders#show"
         get "/find_all", to: "finders#index"
-        get "/:id/invoice", to: "invoice#show"
-        get "/:id/item", to: "item#show"
       end
-      resources :invoice_items, only: [:index, :show]
+      resources :invoice_items, only: [:index, :show] do
+        get "/invoice", to: "invoice#show"
+        get "/item", to: "item#show"
+      end
 
       resources :items, only: [:index, :show] do
         resources :invoice_items, only: :index
