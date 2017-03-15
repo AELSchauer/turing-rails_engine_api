@@ -11,7 +11,7 @@ describe "Invoices API" do
       invoices = JSON.parse(response.body)
    end
 
-   it "can get one invoice by its id" do
+  it "can get one invoice by its id" do
     id = create(:invoice).id
 
     get "/api/v1/invoices/#{id}"
@@ -198,6 +198,80 @@ describe "Invoices API" do
       expect(results.first["id"]).to eq(invoices.first.id)
       expect(results.second["id"]).to eq(invoices.second.id)
       expect(results.third["id"]).to eq(invoices.third.id)
+    end
+  end
+
+  context "relationship methods" do
+    it "can find the customer for an invoice" do
+      customers = create_list(:customer, 3)
+      invoice = create(:invoice, customer: customers.first)
+
+      get "/api/v1/invoices/#{invoice.id}/customer"
+
+      results = JSON.parse(response.body)
+
+      expect(response).to be_success
+      expect(results["id"]).to eq(customers.first.id)
+    end
+
+    it "can find the details for an invoice" do
+      invoice = create(:invoice_with_invoice_items)
+      invoice_items = invoice.invoice_items
+      create_list(:invoice_item, 4)
+
+      get "/api/v1/invoices/#{invoice.id}/invoice_items"
+
+      results = JSON.parse(response.body)
+
+      expect(response).to be_success
+      expect(results.count).to eq(3)
+      expect(results.first["id"]).to eq(invoice_items.first.id)
+      expect(results.second["id"]).to eq(invoice_items.second.id)
+      expect(results.third["id"]).to eq(invoice_items.third.id)
+    end
+
+    it "can find the items for an invoice" do
+      invoice = create(:invoice_with_invoice_items)
+      items = invoice.items
+      create_list(:item, 4)
+
+      get "/api/v1/invoices/#{invoice.id}/items"
+
+      results = JSON.parse(response.body)
+
+      expect(response).to be_success
+      expect(results.count).to eq(3)
+      expect(results.first["id"]).to eq(items.first.id)
+      expect(results.second["id"]).to eq(items.second.id)
+      expect(results.third["id"]).to eq(items.third.id)
+    end
+
+    it "can find the merchant for an invoice" do
+      merchants = create_list(:merchant, 3)
+      invoice = create(:invoice, merchant: merchants.first)
+
+      get "/api/v1/invoices/#{invoice.id}/merchant"
+
+      results = JSON.parse(response.body)
+
+      expect(response).to be_success
+      expect(results["id"]).to eq(merchants.first.id)
+    end
+
+    it "can find the transactions for an invoice" do
+      invoice = create(:invoice_with_transactions)
+      transactions = invoice.transactions
+      create_list(:transaction, 4)
+
+      get "/api/v1/invoices/#{invoice.id}/transactions"
+
+      results = JSON.parse(response.body)
+
+      expect(response).to be_success
+      expect(results.count).to eq(3)
+      expect(results.first["id"]).to eq(transactions.first.id)
+      expect(results.second["id"]).to eq(transactions.second.id)
+      expect(results.third["id"]).to eq(transactions.third.id)
     end
   end
 end
