@@ -229,5 +229,21 @@ describe "Invoices API" do
       expect(results.second["id"]).to eq(invoice_items.second.id)
       expect(results.third["id"]).to eq(invoice_items.third.id)
     end
+
+    it "can find the items for an invoice" do
+      invoice = create(:invoice_with_invoice_items)
+      items = invoice.items
+      create_list(:item, 4)
+
+      get "/api/v1/invoices/#{invoice.id}/items"
+
+      results = JSON.parse(response.body)
+
+      expect(response).to be_success
+      expect(results.count).to eq(3)
+      expect(results.first["id"]).to eq(items.first.id)
+      expect(results.second["id"]).to eq(items.second.id)
+      expect(results.third["id"]).to eq(items.third.id)
+    end
   end
 end
