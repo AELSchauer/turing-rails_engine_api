@@ -2,14 +2,6 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
-      namespace :merchants do
-        get 'revenue/index'
-      end
-    end
-  end
-
-  namespace :api do
-    namespace :v1 do
       namespace :customers do
         get "/find", to: "find#show"
         get "/find_all", to: "find#index"
