@@ -257,5 +257,21 @@ describe "Invoices API" do
       expect(response).to be_success
       expect(results["id"]).to eq(merchants.first.id)
     end
+
+    it "can find the transactions for an invoice" do
+      invoice = create(:invoice_with_transactions)
+      transactions = invoice.transactions
+      create_list(:transaction, 4)
+
+      get "/api/v1/invoices/#{invoice.id}/transactions"
+
+      results = JSON.parse(response.body)
+
+      expect(response).to be_success
+      expect(results.count).to eq(3)
+      expect(results.first["id"]).to eq(transactions.first.id)
+      expect(results.second["id"]).to eq(transactions.second.id)
+      expect(results.third["id"]).to eq(transactions.third.id)
+    end
   end
 end
