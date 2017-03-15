@@ -166,5 +166,22 @@ describe "Invoices API" do
         expect(result["merchant_id"]).to eq(merchant.id)
       end
     end
+
+    it "can find all invoices by when they were created" do
+      created = "2017-01-01T00:00:00.000Z"
+      invoices = create_list(:invoice, 2, created_at: created)
+      create_list(:invoice, 4)
+
+      get "/api/v1/invoices/find_all?created_at=#{created}"
+
+      results = JSON.parse(response.body)
+
+      expect(response).to be_success
+      expect(results.count).to eq(2)
+
+      expect(results.first["id"]).to eq(invoices.first.id)
+      expect(results.second["id"]).to eq(invoices.second.id)
+    end
+
   end
 end
