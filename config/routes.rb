@@ -24,12 +24,12 @@ Rails.application.routes.draw do
       end
 
       namespace :invoice_items do
-        get "/find", to: "finders#show"
-        get "/find_all", to: "finders#index"
+        get "/find", to: "find#show"
+        get "/find_all", to: "find#index"
       end
       resources :invoice_items, only: [:index, :show] do
-        get "/invoice", to: "invoice#show"
-        get "/item", to: "item#show"
+        get "/invoice", to: "invoice_items/invoice#show"
+        get "/item", to: "invoice_items/item#show"
       end
 
       resources :items, only: [:index, :show] do
