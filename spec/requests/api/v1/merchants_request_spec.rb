@@ -32,16 +32,28 @@ describe "Merchants API" do
   context "business logic methods" do
     it "can get the revenue for a single merchant" do
       merchant = create(:merchant)
-      create_list(:invoice_item, 3, invoice: create(:invoice, merchant: merchant))
-      create_list(:invoice_item, 2, invoice: create(:invoice, merchant: merchant))
+      invoices = create_list(:invoice, 3, merchant: merchant)
+      create(:transaction, invoice: invoices.first)
+      create(:transaction, invoice: invoices.first, result: "failed")
+      create(:transaction, invoice: invoices.second, result: "failed")
+      create(:transaction, invoice: invoices.third)
+      create(:invoice_item, invoice: invoices.first)
+      create(:invoice_item, invoice: invoices.first, quantity: 2)
+      create(:invoice_item, invoice: invoices.first, unit_price: "20.00")
+      create(:invoice_item, invoice: invoices.first, quantity: 2, unit_price: "20.00")
+      create(:invoice_item, invoice: invoices.second)
+      create(:invoice_item, invoice: invoices.second, quantity: 2)
+      create(:invoice_item, invoice: invoices.second, unit_price: "20.00")
+      create(:invoice_item, invoice: invoices.second, quantity: 2, unit_price: "20.00")
+      create(:invoice_item, invoice: invoices.third, quantity: 2)
+      create(:invoice_item, invoice: invoices.third, unit_price: "20.00")
 
       get "/api/v1/merchants/#{merchant.id}/revenue"
 
       result = JSON.parse(response.body)
 
       expect(response).to be_success
-      expect(result["id"]).to eq(id)
-      expect(result["revenue"]).to eq(50)
+      expect(result["revenue"]).to eq("130.0")
     end
   end
 end
