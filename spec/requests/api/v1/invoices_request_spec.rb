@@ -149,5 +149,22 @@ describe "Invoices API" do
         expect(result["customer_id"]).to eq(customer.id)
       end
     end
+
+    it "can find all invoices by their merchant id" do
+      merchant = create(:merchant)
+      invoices = create_list(:customer, 5, merchant_id: merchant)
+      create_list(:customer, 4)
+
+      get "/api/v1/customers/find_all?merchant_id=#{merchant.id}"
+
+      results = JSON.parse(response.body)
+
+      expect(response).to be_success
+      expect(results.count).to eq(5)
+
+      results.each do |result|
+        expect(result["merchant_id"]).to eq(merchant.id)
+      end
+    end
   end
 end
