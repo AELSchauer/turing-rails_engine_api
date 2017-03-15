@@ -11,7 +11,7 @@ describe "Invoices API" do
       invoices = JSON.parse(response.body)
    end
 
-   it "can get one invoice by its id" do
+  it "can get one invoice by its id" do
     id = create(:invoice).id
 
     get "/api/v1/invoices/#{id}"
@@ -198,6 +198,20 @@ describe "Invoices API" do
       expect(results.first["id"]).to eq(invoices.first.id)
       expect(results.second["id"]).to eq(invoices.second.id)
       expect(results.third["id"]).to eq(invoices.third.id)
+    end
+  end
+
+  context "relationship methods" do
+    it "can find the customer for a invoice" do
+      customers = create_list(:customer, 3)
+      invoice = create(:invoice, customer: customers.first)
+
+      get "/api/v1/invoices/#{invoice.id}/customer"
+
+      results = JSON.parse(response.body)
+
+      expect(response).to be_success
+      expect(results["id"]).to eq(customers.first.id)
     end
   end
 end
