@@ -1,7 +1,7 @@
 FactoryGirl.define do
   factory :invoice_item do
     quantity 1
-    unit_price "9.99"
+    unit_price "10.00"
     item
     invoice
   end

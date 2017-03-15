@@ -28,4 +28,20 @@ describe "Merchants API" do
     expect(merchant_1).to_not have_attributes(:updated_at => "1234")
     expect(merchant_1).to_not have_attributes(:created_at => "5678")
   end
+
+  context "business logic methods" do
+    it "can get the revenue for a single merchant" do
+      merchant = create(:merchant)
+      create_list(:invoice_item, 3, invoice: create(:invoice, merchant: merchant))
+      create_list(:invoice_item, 2, invoice: create(:invoice, merchant: merchant))
+
+      get "/api/v1/merchants/#{merchant.id}/revenue"
+
+      result = JSON.parse(response.body)
+
+      expect(response).to be_success
+      expect(result["id"]).to eq(id)
+      expect(result["revenue"]).to eq(50)
+    end
+  end
 end

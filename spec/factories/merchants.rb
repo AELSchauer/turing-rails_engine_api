@@ -1,5 +1,7 @@
+require 'faker'
+
 FactoryGirl.define do
   factory :merchant do
-    name "MyString"
+    name Faker::Company.name
   end
 end
