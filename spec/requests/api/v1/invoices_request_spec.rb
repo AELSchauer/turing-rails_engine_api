@@ -202,7 +202,7 @@ describe "Invoices API" do
   end
 
   context "relationship methods" do
-    it "can find the customer for a invoice" do
+    it "can find the customer for an invoice" do
       customers = create_list(:customer, 3)
       invoice = create(:invoice, customer: customers.first)
 
@@ -212,6 +212,21 @@ describe "Invoices API" do
 
       expect(response).to be_success
       expect(results["id"]).to eq(customers.first.id)
+    end
+
+    it "can find the details for an invoice" do
+      invoice = create(:invoice_with_invoice_items)
+      invoice_items = invoice.invoice_items
+      create_list(:invoice_item, 3)
+
+      get "/api/v1/invoices/#{invoice.id}/invoice_items"
+
+      results = JSON.parse(response.body)
+
+      expect(response).to be_success
+      expect(results["id"]).to eq(invoice_items.first.id)
+      expect(results["id"]).to eq(invoice_items.second.id)
+      expect(results["id"]).to eq(invoice_items.third.id)
     end
   end
 end
