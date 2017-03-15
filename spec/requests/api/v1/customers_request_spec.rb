@@ -25,11 +25,18 @@ describe "Customers API" do
   end
 
   it "serializes attributes" do
-    customer_1 = Customer.create(first_name: "Vincent", last_name: "Vega", created_at: "1234", updated_at: "5678")
-    expect(customer_1).to have_attributes(:first_name => "Vincent")
-    expect(customer_1).to have_attributes(:last_name => "Vega")
-    expect(customer_1).to_not have_attributes(:updated_at => "1234")
-    expect(customer_1).to_not have_attributes(:created_at => "5678")
+    created = "2017-01-01T00:00:00.000Z"
+    updated = "2017-02-01T00:00:00.000Z"
+    customer_1 = Customer.create(
+      first_name: "Vincent",
+      last_name: "Vega",
+      created_at: created,
+      updated_at: updated
+    )
+    expect(customer_1).to have_attributes(first_name: "Vincent")
+    expect(customer_1).to have_attributes(last_name: "Vega")
+    expect(customer_1).to_not have_attributes(created_at: created)
+    expect(customer_1).to_not have_attributes(updated_at: updated)
   end
 
   context "find method" do
@@ -48,7 +55,7 @@ describe "Customers API" do
 
     it "can find a customer by its first name" do
       customer1 = create(:customer, first_name: "Han")
-      customer2 = create(:customer, first_name: "Han")
+      customer2 = create(:customer)
 
       get "/api/v1/customers/find?first_name=Han"
 
@@ -61,7 +68,7 @@ describe "Customers API" do
 
     it "can find a customer by its last name" do
       customer1 = create(:customer, last_name: "Solo")
-      customer2 = create(:customer, last_name: "Solo")
+      customer2 = create(:customer)
 
       get "/api/v1/customers/find?last_name=Solo"
 
@@ -74,19 +81,8 @@ describe "Customers API" do
 
     it "can find a customer by when it was created" do
       created = "2017-01-01T00:00:00.000Z"
-      updated = "2017-02-01T00:00:00.000Z"
-      customer1 = customer1 = Customer.create(
-        first_name: "Luke",
-        last_name: "Skywalker",
-        created_at: created,
-        updated_at: updated
-      )
-      customer2 = customer2 = Customer.create(
-        first_name: "Leia",
-        last_name: "Organa",
-        created_at: created,
-        updated_at: updated
-      )
+      customer1 = create(:customer, created_at: created)
+      customer2 = create(:customer)
 
       get "/api/v1/customers/find?created_at=#{created}"
 
@@ -98,20 +94,9 @@ describe "Customers API" do
     end
 
     it "can find a customer by when it was updated" do
-      created = "2017-01-01T00:00:00.000Z"
       updated = "2017-02-01T00:00:00.000Z"
-      customer1 = customer1 = Customer.create(
-        first_name: "Luke",
-        last_name: "Skywalker",
-        created_at: created,
-        updated_at: updated
-      )
-      customer2 = customer2 = Customer.create(
-        first_name: "Leia",
-        last_name: "Organa",
-        created_at: created,
-        updated_at: updated
-      )
+      customer1 = create(:customer, updated_at: updated)
+      customer2 = create(:customer)
 
       get "/api/v1/customers/find?updated_at=#{updated}"
 
@@ -174,21 +159,8 @@ describe "Customers API" do
 
     it "can find all customers by when they were created" do
       created = "2017-01-01T00:00:00.000Z"
-      updated = "2017-02-01T00:00:00.000Z"
-      customer1 = Customer.create(
-        first_name: "Luke",
-        last_name: "Skywalker",
-        created_at: created,
-        updated_at: updated
-      )
-      customer2 = Customer.create(
-        first_name: "Leia",
-        last_name: "Organa",
-        created_at: created,
-        updated_at: updated
-      )
+      customers = create_list(:customer, 2, created_at: created)
       create_list(:customer, 4)
-
 
       get "/api/v1/customers/find_all?created_at=#{created}"
 
@@ -197,33 +169,14 @@ describe "Customers API" do
       expect(response).to be_success
       expect(results.count).to eq(2)
 
-      expect(results.first["id"]).to eq(customer1.id)
-      expect(results.second["id"]).to eq(customer2.id)
+      expect(results.first["id"]).to eq(customers.first.id)
+      expect(results.second["id"]).to eq(customers.second.id)
     end
 
     it "can find all customers by when they were updated" do
-      created = "2017-01-01T00:00:00.000Z"
       updated = "2017-02-01T00:00:00.000Z"
-      customer1 = Customer.create(
-        first_name: "Luke",
-        last_name: "Skywalker",
-        created_at: created,
-        updated_at: updated
-      )
-      customer2 = Customer.create(
-        first_name: "Leia",
-        last_name: "Organa",
-        created_at: created,
-        updated_at: updated
-      )
-      customer3 = Customer.create(
-        first_name: "Darth",
-        last_name: "Vader",
-        created_at: created,
-        updated_at: updated
-      )
+      customers = create_list(:customer, 3, updated_at: updated)
       create_list(:customer, 2)
-
 
       get "/api/v1/customers/find_all?updated_at=#{updated}"
 
@@ -232,9 +185,9 @@ describe "Customers API" do
       expect(response).to be_success
       expect(results.count).to eq(3)
 
-      expect(results.first["id"]).to eq(customer1.id)
-      expect(results.second["id"]).to eq(customer2.id)
-      expect(results.third["id"]).to eq(customer3.id)
+      expect(results.first["id"]).to eq(customers.first.id)
+      expect(results.second["id"]).to eq(customers.second.id)
+      expect(results.third["id"]).to eq(customers.third.id)
     end
   end
 
