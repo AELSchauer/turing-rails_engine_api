@@ -256,4 +256,30 @@ describe "Items API" do
     end
   end
 
+  context "relationship endpoints" do
+    it "returns invoice items associated with an item" do
+      create(:item)
+      create(:invoice_item, item: Item.first)
+
+      get "/api/v1/items/#{Item.first.id}/invoice_items"
+      item = JSON.parse(response.body)
+
+      expect(response).to be_success
+      expect(item.first["item_id"]).to eq(Item.first.id)
+      expect(item.count).to eq(1)
+		end
+
+    it "returns an items merchant" do
+      merchant = create(:merchant)
+      merchant.items << create(:item)
+      item = Item.first
+
+      get "/api/v1/items/#{item.id}/merchant"
+      merchant = JSON.parse(response.body)
+
+      expect(response).to be_success
+      expect(merchant['id']).to eq(item.merchant_id)
+    end
+  end
+
 end
