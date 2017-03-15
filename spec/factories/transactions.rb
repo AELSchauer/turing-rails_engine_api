@@ -1,8 +1,8 @@
 FactoryGirl.define do
   factory :transaction do
-    credit_card_number 1
-    credit_card_expiration_date "2017-03-13"
-    result "MyString"
+    credit_card_number Faker::Business.credit_card_number.gsub("-","")
+    credit_card_expiration_date Faker::Business.credit_card_expiry_date
+    result "success"
     invoice
   end
 end

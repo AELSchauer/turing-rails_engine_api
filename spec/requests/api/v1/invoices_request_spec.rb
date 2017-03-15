@@ -22,6 +22,14 @@ describe "Invoices API" do
     expect(invoice["id"]).to eq(id)
   end
 
+  it "serializes attributes" do
+    invoice_1 = Invoice.create(customer_id: 83, merchant_id: 56, created_at: "1234", updated_at: "5678")
+    expect(invoice_1).to have_attributes(:customer_id => 83)
+    expect(invoice_1).to have_attributes(:merchant_id => 56)
+    expect(invoice_1).to_not have_attributes(:updated_at => "1234")
+    expect(invoice_1).to_not have_attributes(:created_at => "5678")
+  end
+
   context "find method" do
     it "can find an invoice by its id" do
       invoice1 = create(:invoice)
