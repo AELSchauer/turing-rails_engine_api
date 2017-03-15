@@ -45,41 +45,38 @@ describe "Invoices API" do
     end
 
     it "can find an invoice by its customer id" do
-      customer = create(:customer)
-      invoice1 = create(:invoice, customer: customer)
-      invoice2 = create(:invoice, customer: customer)
-      invoice3 = create(:invoice)
+      customer1 = create(:customer)
+      customer2 = create(:customer)
+      invoice1 = create(:invoice, customer: customer1)
+      invoice2 = create(:invoice, customer: customer2)
 
-      get "/api/v1/invoices/find?customer_id=#{customer.id}"
+      get "/api/v1/invoices/find?customer_id=#{customer1.id}"
 
       result = JSON.parse(response.body)
 
       expect(response).to be_success
       expect(result["id"]).to eq(invoice1.id)
       expect(result["id"]).to_not eq(invoice2.id)
-      expect(result["id"]).to_not eq(invoice3.id)
     end
 
     it "can find an invoice by its merchant id" do
-      merchant = create(:merchant)
-      invoice1 = create(:invoice, merchant: merchant)
-      invoice2 = create(:invoice, merchant: merchant)
-      invoice3 = create(:invoice)
+      merchant1 = create(:merchant)
+      merchant2 = create(:merchant)
+      invoice1 = create(:invoice, merchant: merchant1)
+      invoice2 = create(:invoice, merchant: merchant2)
 
-      get "/api/v1/invoices/find?merchant_id=#{merchant.id}"
+      get "/api/v1/invoices/find?merchant_id=#{merchant1.id}"
 
       result = JSON.parse(response.body)
 
       expect(response).to be_success
       expect(result["id"]).to eq(invoice1.id)
       expect(result["id"]).to_not eq(invoice2.id)
-      expect(result["id"]).to_not eq(invoice3.id)
     end
 
     it "can find an invoice by its status" do
       invoice1 = create(:invoice, status: "cancelled")
-      invoice2 = create(:invoice, status: "cancelled")
-      invoice3 = create(:invoice)
+      invoice2 = create(:invoice)
 
       get "/api/v1/invoices/find?status=cancelled"
 
@@ -88,24 +85,34 @@ describe "Invoices API" do
       expect(response).to be_success
       expect(result["id"]).to eq(invoice1.id)
       expect(result["id"]).to_not eq(invoice2.id)
-      expect(result["id"]).to_not eq(invoice3.id)
     end
 
     it "can find an invoice by when it was created" do
       created = "2017-01-01T00:00:00.000Z"
-      updated = "2017-02-01T00:00:00.000Z"
       invoice1 = create(:invoice, created_at: created)
-      invoice2 = create(:invoice, created_at: created)
-      invoice3 = create(:invoice)
+      invoice2 = create(:invoice)
 
-      get "/api/v1/invoices/find?status=cancelled"
+      get "/api/v1/invoices/find?created_at=#{created}"
 
       result = JSON.parse(response.body)
 
       expect(response).to be_success
       expect(result["id"]).to eq(invoice1.id)
       expect(result["id"]).to_not eq(invoice2.id)
-      expect(result["id"]).to_not eq(invoice3.id)
+    end
+
+    it "can find an invoice by when it was updated" do
+      updated = "2018-02-01T00:00:00.000Z"
+      invoice1 = create(:invoice, updated_at: updated)
+      invoice2 = create(:invoice)
+
+      get "/api/v1/invoices/find?updated_at=#{updated}"
+
+      result = JSON.parse(response.body)
+
+      expect(response).to be_success
+      expect(result["id"]).to eq(invoice1.id)
+      expect(result["id"]).to_not eq(invoice2.id)
     end
   end
 end
