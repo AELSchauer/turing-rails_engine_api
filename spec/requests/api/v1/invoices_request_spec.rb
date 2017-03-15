@@ -245,5 +245,17 @@ describe "Invoices API" do
       expect(results.second["id"]).to eq(items.second.id)
       expect(results.third["id"]).to eq(items.third.id)
     end
+
+    it "can find the merchant for an invoice" do
+      merchants = create_list(:merchant, 3)
+      invoice = create(:invoice, merchant: merchants.first)
+
+      get "/api/v1/invoices/#{invoice.id}/merchant"
+
+      results = JSON.parse(response.body)
+
+      expect(response).to be_success
+      expect(results["id"]).to eq(merchants.first.id)
+    end
   end
 end
