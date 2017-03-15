@@ -23,7 +23,7 @@ describe "Customers API" do
     expect(response).to be_success
     expect(customer["id"]).to eq(id)
   end
-  
+
   it "serializes attributes" do
     customer_1 = Customer.create(first_name: "Vincent", last_name: "Vega", created_at: "1234", updated_at: "5678")
     expect(customer_1).to have_attributes(:first_name => "Vincent")
