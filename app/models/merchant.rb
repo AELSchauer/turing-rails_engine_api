@@ -42,4 +42,8 @@ class Merchant < ApplicationRecord
 
     # results = ActiveRecord::Base.connection.execute(query).first
   end
+
+  def self.random
+    order("RANDOM()").first
+  end
 end
