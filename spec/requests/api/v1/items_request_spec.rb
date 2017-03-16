@@ -332,7 +332,7 @@ describe "Items API" do
           item: item,
           invoice: create(:invoice, created_at: create_date_1)
         )
-        invoice_items = create_list(:invoice_item, 2, quantity: 2,
+        invoice_items = create_list(:invoice_item, 3, quantity: 2,
           item: item,
           invoice: create(:invoice, created_at: create_date_2)
         )
