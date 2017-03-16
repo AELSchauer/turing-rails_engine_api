@@ -299,4 +299,56 @@ describe "Items API" do
     end
   end
 
+  context "business logic methods" do
+    context "best day" do
+      it "can return the day with the most sales for an item"
+        create_date_1 = "2017-01-01T00:00:00.000Z"
+        create_date_2 = "2017-02-02T00:00:00.000Z"
+        create_date_3 = "2017-03-03T00:00:00.000Z"
+        item = create(:item)
+        invoice_items = create_list(:invoice_item, 10,
+          item: item,
+          invoice: create(:invoice, create_at: create_date_1)
+        )
+        invoice_items = create_list(:invoice_item, 7,
+          item: item,
+          invoice: create(:invoice, create_at: create_date_2)
+        )
+
+        get "/api/v1/items/#{item.id}/best_day"
+        results = JSON.parse(response.body)
+
+        expect(response).to be_success
+        expect(results['best_day']).to eq(create_date_1)
+        expect(results['best_day']).to_not eq(create_date_2)
+      end
+
+      it "can return the most recent day when two days are tied with the most sales for an item"
+        create_date_1 = "2017-01-01T00:00:00.000Z"
+        create_date_2 = "2017-02-02T00:00:00.000Z"
+        create_date_3 = "2017-03-03T00:00:00.000Z"
+        item = create(:item)
+        invoice_items = create_list(:invoice_item, 10,
+          item: item,
+          invoice: create(:invoice, create_at: create_date_1)
+        )
+        invoice_items = create_list(:invoice_item, 10,
+          item: item,
+          invoice: create(:invoice, create_at: create_date_2)
+        )
+        invoice_items = create_list(:invoice_item, 7,
+          item: item,
+          invoice: create(:invoice, create_at: create_date_3)
+        )
+
+        get "/api/v1/items/#{item.id}/best_day"
+        results = JSON.parse(response.body)
+
+        expect(response).to be_success
+        expect(results['best_day']).to eq(create_date_2)
+        expect(results['best_day']).to_not eq(create_date_1)
+        expect(results['best_day']).to_not eq(create_date_3)
+      end
+    end
+  end
 end
