@@ -24,4 +24,22 @@ class Merchant < ApplicationRecord
     #
     # results = ActiveRecord::Base.connection.execute(query).first["revenue"]
   end
+
+  def self.favorite_by_customer(customer_id)
+    joins(invoices: :customer).where(customers: {id: customer_id}).group('merchants.id').order('count(merchants.id) DESC').limit(1).first
+
+    # query = "SELECT merchants.*
+    #   FROM customers
+    #   INNER JOIN invoices
+    #           ON invoices.customer_id = customers.id
+    #   INNER JOIN merchants
+    #           ON merchants.id = invoices.merchant_id
+    #   WHERE customers.id = #{customer_id}
+    #   GROUP BY merchants.id
+    #   ORDER BY count(merchants.id) DESC
+    #   LIMIT 1
+    #   ;"
+
+    # results = ActiveRecord::Base.connection.execute(query).first
+  end
 end
