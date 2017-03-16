@@ -231,9 +231,9 @@ describe "Customers API" do
     it "can find a customer's favorite merchant" do
       customer = create(:customer)
       merchants = create_list(:merchant, 3)
-      create_list(:invoice, 10, customer: customer, merchant: merchant.first)
-      create_list(:invoice, 5, customer: customer, merchant: merchant.second)
-      create_list(:invoice, 1, customer: customer, merchant: merchant.third)
+      create_list(:invoice, 10, customer: customer, merchant: merchants.first)
+      create_list(:invoice, 5, customer: customer, merchant: merchants.second)
+      create_list(:invoice, 1, customer: customer, merchant: merchants.third)
 
       get "/api/v1/customers/#{customer.id}/favorite_merchant"
 
