@@ -1,7 +1,7 @@
 class Transaction < ApplicationRecord
   belongs_to :invoice
 
-  def customer
-    invoice.customer
+  def self.random
+    order("RANDOM()").first
   end
 end

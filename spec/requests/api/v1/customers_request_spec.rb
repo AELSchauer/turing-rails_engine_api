@@ -191,6 +191,22 @@ describe "Customers API" do
     end
   end
 
+  context "random method" do
+    it "can find a random customer" do
+      create_list(:customer, 3)
+
+      get '/api/v1/customers/random'
+
+      customer = JSON.parse(response.body)
+
+      expect(response).to be_success
+      expect(customer).to be_a(Hash)
+      expect(customer).to have_key("id")
+      expect(customer).to have_key("first_name")
+      expect(customer).to have_key("last_name")
+    end
+  end
+
   context "relationship methods" do
     it "can find all the transactions for a customer" do
       customer = create(:customer)

@@ -13,7 +13,7 @@ describe "Transactions API" do
       expect(transactions.count).to eq(3)
    end
 
-   it "can get one transaction by its id" do
+  it "can get one transaction by its id" do
     id = create(:transaction).id
 
     get "/api/v1/transactions/#{id}"
@@ -222,6 +222,23 @@ describe "Transactions API" do
       expect(results.first["id"]).to eq(transactions.first.id)
       expect(results.second["id"]).to eq(transactions.second.id)
       expect(results.third["id"]).to eq(transactions.third.id)
+    end
+  end
+
+  context "random method" do
+    it "can find a random transaction" do
+      create_list(:transaction, 3)
+
+      get '/api/v1/transactions/random'
+
+      transaction = JSON.parse(response.body)
+
+      expect(response).to be_success
+      expect(transaction).to be_a(Hash)
+      expect(transaction).to have_key("id")
+      expect(transaction).to have_key("credit_card_number")
+      expect(transaction).to have_key("result")
+      expect(transaction).to have_key("invoice_id")
     end
   end
 

@@ -13,7 +13,7 @@ describe "Items API" do
       expect(items.count).to eq(3)
    end
 
-   it "can get one item by its id" do
+  it "can get one item by its id" do
     id = create(:item).id
 
     get "/api/v1/items/#{id}"
@@ -253,6 +253,23 @@ describe "Items API" do
       expect(results.first["id"]).to eq(items.first.id)
       expect(results.second["id"]).to eq(items.second.id)
       expect(results.third["id"]).to eq(items.third.id)
+    end
+  end
+
+  context "random method" do
+    it "can find a random item" do
+      create_list(:item, 3)
+
+      get '/api/v1/items/random'
+
+      item = JSON.parse(response.body)
+
+      expect(response).to be_success
+      expect(item).to be_a(Hash)
+      expect(item).to have_key("name")
+      expect(item).to have_key("description")
+      expect(item).to have_key("unit_price")
+      expect(item).to have_key("merchant_id")
     end
   end
 

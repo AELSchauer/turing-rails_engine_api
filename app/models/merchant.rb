@@ -2,6 +2,10 @@ class Merchant < ApplicationRecord
   has_many :items
   has_many :invoices
 
+  def self.random
+    order("RANDOM()").first
+  end
+
   def self.revenue_by_id(id)
     result = joins(invoices: [:invoice_items, :transactions])
       .where(id: id, transactions: {result: "success"})
@@ -41,9 +45,5 @@ class Merchant < ApplicationRecord
     #   ;"
 
     # results = ActiveRecord::Base.connection.execute(query).first
-  end
-
-  def self.random
-    order("RANDOM()").first
   end
 end
