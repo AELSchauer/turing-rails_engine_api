@@ -23,9 +23,10 @@ describe "Invoices API" do
   end
 
   it "serializes attributes" do
-    invoice_1 = Invoice.create(customer_id: 83, merchant_id: 56, created_at: "1234", updated_at: "5678")
+    invoice_1 = Invoice.create(customer_id: 83, merchant_id: 56, status: "shipped", created_at: "1234", updated_at: "5678")
     expect(invoice_1).to have_attributes(:customer_id => 83)
     expect(invoice_1).to have_attributes(:merchant_id => 56)
+    expect(invoice_1).to have_attributes(:status => "shipped")
     expect(invoice_1).to_not have_attributes(:updated_at => "1234")
     expect(invoice_1).to_not have_attributes(:created_at => "5678")
   end
@@ -198,6 +199,23 @@ describe "Invoices API" do
       expect(results.first["id"]).to eq(invoices.first.id)
       expect(results.second["id"]).to eq(invoices.second.id)
       expect(results.third["id"]).to eq(invoices.third.id)
+    end
+  end
+
+  context "random method" do
+    it "can find a random invoice" do
+      create_list(:invoice, 3)
+
+      get '/api/v1/invoices/random'
+
+      invoice = JSON.parse(response.body)
+
+      expect(response).to be_success
+      expect(invoice).to be_a(Hash)
+      expect(invoice).to have_key("id")
+      expect(invoice).to have_key("customer_id")
+      expect(invoice).to have_key("merchant_id")
+      expect(invoice).to have_key("status")
     end
   end
 
