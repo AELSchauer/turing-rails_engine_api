@@ -227,4 +227,21 @@ describe "Customers API" do
     end
   end
 
+  context "business logic methods" do
+    it "can find a customer's favorite merchant" do
+      customer = create(:customer)
+      merchants = create_list(:merchant, 3)
+      create_list(:invoice, 10, customer: customer, merchant: merchants.first)
+      create_list(:invoice, 5, customer: customer, merchant: merchants.second)
+      create_list(:invoice, 1, customer: customer, merchant: merchants.third)
+
+      get "/api/v1/customers/#{customer.id}/favorite_merchant"
+
+      result = JSON.parse(response.body)
+
+      expect(response).to be_success
+      expect(result["id"]).to eq(merchants.first.id)
+      expect(result["name"]).to eq(merchants.first.name)
+    end
+  end
 end

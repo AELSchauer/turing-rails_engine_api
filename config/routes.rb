@@ -10,6 +10,7 @@ Rails.application.routes.draw do
       resources :customers, only: [:index, :show] do
         get "/transactions", to: "customers/transactions#index"
         get "/invoices", to: "customers/invoices#index"
+        get "/favorite_merchant", to: "customers/favorite_merchant#show"
       end
 
       namespace :invoices do
