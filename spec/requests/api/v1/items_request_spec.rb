@@ -349,7 +349,25 @@ describe "Items API" do
         expect(results['best_day']).to_not eq(create_date_1)
         expect(results['best_day']).to_not eq(create_date_3)
       end
-    end
-  end
+      
+      it "returns the top x items ranked by total revenue generated" do
+        item1 = create(:item)
+        item2 = create(:item)
+        invoice_1, invoice_2, invoice_3 = create_list(:invoice, 3)
+        invoice_items_1 = create(:invoice_item, item: item1, invoice: invoice_1, quantity: 5, unit_price: 500)
+        invoice_items_2 = create(:invoice_item, item: item2, invoice: invoice_2, quantity: 2, unit_price: 200)
+        invoice_items_3 = create(:invoice_item, item: item2, invoice: invoice_3, quantity: 1, unit_price: 200)
+        transaction = create(:transaction, invoice: invoice_1, result: "success")
+        transaction = create(:transaction, invoice: invoice_2, result: "success")
+        transaction = create(:transaction, invoice: invoice_3, result: "success")
 
+        get "/api/v1/items/most_revenue?quantity=1"
+
+        result = JSON.parse(response.body)
+
+        expect(response).to be_success
+        expect(result.first["id"]).to eq(item1.id)
+      end
+  end
+    
 end
