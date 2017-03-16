@@ -230,5 +230,29 @@ describe "Merchants API" do
       expect(response).to be_success
       expect(result["revenue"]).to eq("130.0")
     end
+
+    it "can get the total revenue for all merchants" do
+      date_1 = "2017-01-01T00:00:00.000Z"
+      date_2 = "2017-02-02T00:00:00.000Z"
+      invoice1 = create(:invoice, created_at: date_1)
+      invoice2 = create(:invoice, created_at: date_2)
+      create_list(:invoice_item, 8, invoice: invoice1)
+      create_list(:invoice_item, 8, invoice: invoice2)
+      create_list(:invoice_item, 4, invoice: invoice1, quantity: 2, unit_price: "20.00")
+      create_list(:invoice_item, 4, invoice: invoice2, quantity: 2, unit_price: "20.00")
+      Invoice.all.each_slice(4) do |invoice1, invoice2, invoice3, invoice4|
+        create(:transaction, invoice: invoice1, result: "success")
+        create(:transaction, invoice: invoice2, result: "success")
+        create(:transaction, invoice: invoice3, result: "success")
+        create(:transaction, invoice: invoice4, result: "failed")
+      end
+
+      get "/api/v1/merchants/revenue?date=#{date_1}"
+
+      result = JSON.parse(response.body)
+
+      expect(response).to be_success
+      expect(result["total_revenue"]).to eq("180.0")
+    end
   end
 end
