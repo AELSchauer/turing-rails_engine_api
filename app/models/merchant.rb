@@ -49,10 +49,9 @@ class Merchant < ApplicationRecord
   end
 
   def self.total_revenue(date)
-    Invoice.joins(:invoice_items, :transactions)
-      .where(transactions: {result: "success"}, created_at: date)
+    joins(invoices: [:invoice_items, :transactions])
+      .where(transactions: {result: "success"}, invoices: {created_at: date})
       .sum("quantity * unit_price")
-
 
     ## This query will deliver the same result as ActiveRecord,
     ## but not in the same format.
