@@ -368,6 +368,24 @@ describe "Items API" do
         expect(response).to be_success
         expect(result.first["id"]).to eq(item1.id)
       end
+
+      it "returns the top items ranked by total revenue generated" do
+        item_1, item_2, item_3 = create_list(:item, 3)
+        invoice = create(:invoice)
+        create_list(:transaction, 3, invoice: invoice, result: 'success')
+        create(:invoice_item, item: item_1, invoice: invoice, quantity: 50)
+        create(:invoice_item, item: item_2, invoice: invoice, quantity: 200)
+        create(:invoice_item, item: item_3, invoice: invoice, quantity: 105)
+
+        get "/api/v1/items/most_items?quantity=3"
+
+        result = JSON.parse(response.body)
+
+        expect(response).to be_success
+        expect(result.count).to eq(3)
+        expect(result.first["id"]).to eq(item_2.id)
+        expect(result.last["id"]).to eq(item_1.id)
+      end
     end
   end
 
