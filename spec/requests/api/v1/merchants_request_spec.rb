@@ -346,3 +346,4 @@ describe "Merchants API" do
     end
   end
 end
+end
