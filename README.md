@@ -1,12 +1,12 @@
-#Rails Engine
+# Rails Engine
 
-##Intro
+## Intro
 
 This project is an API sales data analysis tool. The return format for all endpoints is JSON.
 
 The markdown for this project can be found [here](http://backend.turing.io/module3/projects/rails_engine)
 
-###Collaborators
+### Collaborators
 
 -Ashley Schauer [github](https://github.com/AELSchauer)
 
