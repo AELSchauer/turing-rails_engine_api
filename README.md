@@ -6,6 +6,12 @@ This project is an API sales data analysis tool. The return format for all endpo
 
 The markdown for this project can be found [here](http://backend.turing.io/module3/projects/rails_engine)
 
+###Collaborators
+
+-Ashley Schauer [github](https://github.com/AELSchauer)
+
+-Alex Fosco [github](https://github.com/alfosco)
+
 ## How to Get Started
 
 Clone the repo in your terminal:
