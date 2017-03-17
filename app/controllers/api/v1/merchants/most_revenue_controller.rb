@@ -1,7 +1,5 @@
 class Api::V1::Merchants::MostRevenueController < ApplicationController
   def index
-    binding.pry
-    results = Merchant.most_revenue(params[:quantity])
-    render json: {}
+    render json: Merchant.most_revenue(params[:quantity])
   end
 end
