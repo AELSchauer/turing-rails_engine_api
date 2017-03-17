@@ -67,6 +67,30 @@ class Merchant < ApplicationRecord
         # results = ActiveRecord::Base.connection.execute(query).first
   end
 
+  def self.most_revenue(quantity)
+    joins(invoices: [:invoice_items, :transactions])
+      .where(transactions: {result: "success"})
+      .group(:id)
+      .order("sum(invoice_items.quantity * invoice_items.unit_price) DESC")
+      .limit(quantity)
+
+    ## This query will deliver the same result as ActiveRecord,
+    ## but not in the same format.
+        # query = "SELECT merchants.id, merchants.name
+        #   FROM merchants
+        #   INNER JOIN invoices
+        #   ON merchants.id = invoices.merchant_id
+        #   INNER JOIN invoice_items
+        #   ON invoices.id = invoice_items.invoice_id
+        #   INNER JOIN transactions
+        #   ON invoices.id = transactions.invoice_id
+        #   WHERE transactions.result = 'success'
+        #   GROUP BY merchants.id
+        #   ORDER BY sum(invoice_items.quantity * invoice_items.unit_price) DESC
+        #   LIMIT #{quantity}"
+        # results = ActiveRecord::Base.connection.execute(query)
+  end
+  
   def self.most_items(quantity)
     joins(invoices: [:transactions, :invoice_items])
     .where(transactions: {result: "success"})
