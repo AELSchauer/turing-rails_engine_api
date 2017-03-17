@@ -232,6 +232,24 @@ describe "Merchants API" do
       expect(result["revenue"]).to eq("130.0")
     end
 
+    it "returns customer that conducted the highest total number of successful transactions" do
+      merchant = create(:merchant)
+      customer_1, customer_2, customer_3 = create_list(:customer, 3)
+      invoice_1, invoice_2 = create_list(:invoice, 2, customer: customer_1, merchant: merchant)
+      invoice_3, invoice_4, invoice_5 = create_list(:invoice, 3, customer: customer_2, merchant: merchant)
+      invoice_6 = create(:invoice, customer: customer_3, merchant: merchant)
+      Invoice.all.each do |invoice|
+        create(:transaction, result: "success", invoice: invoice)
+      end
+
+      get "/api/v1/merchants/#{merchant.id}/favorite_customer"
+
+      favorite_customer = JSON.parse(response.body)
+
+      expect(response).to be_success
+      expect(favorite_customer["id"]).to eq(customer_2.id)
+    end
+
     it "can get the total revenue for all merchants" do
       date_1 = "2017-01-01T00:00:00.000Z"
       date_2 = "2017-02-02T00:00:00.000Z"
@@ -252,6 +270,26 @@ describe "Merchants API" do
 
       expect(response).to be_success
       expect(result["total_revenue"]).to eq("100.0")
+    end
+
+    it "returns the top merchants by total number of items sold" do
+      merchant_1 = create(:merchant)
+      merchant_2 = create(:merchant)
+      item_1 = create(:item)
+      item_2 = create(:item)
+      invoice_1 = create(:invoice, merchant: merchant_1)
+      invoice_2 = create(:invoice, merchant: merchant_2)
+      invoice_items_1 = create(:invoice_item, item: item_1, invoice: invoice_1, quantity: 5, unit_price: 500)
+      invoice_items_2 = create(:invoice_item, item: item_2, invoice: invoice_2, quantity: 20, unit_price: 200)
+      transaction = create(:transaction, invoice: invoice_1, result: "success")
+      transaction = create(:transaction, invoice: invoice_2, result: "success")
+
+      get "/api/v1/merchants/most_items?quantity=2"
+
+      merchants = JSON.parse(response.body)
+
+      expect(response).to be_success
+      expect(merchants.first["id"]).to eq(merchant_2.id)
     end
   end
 end
