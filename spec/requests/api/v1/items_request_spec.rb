@@ -299,25 +299,75 @@ describe "Items API" do
     end
   end
 
-  context "business intelligence methods" do
-    it "returns the top x items ranked by total revenue generated" do
-      item1 = create(:item)
-      item2 = create(:item)
-      invoice_1, invoice_2, invoice_3 = create_list(:invoice, 3)
-      invoice_items_1 = create(:invoice_item, item: item1, invoice: invoice_1, quantity: 5, unit_price: 500)
-      invoice_items_2 = create(:invoice_item, item: item2, invoice: invoice_2, quantity: 2, unit_price: 200)
-      invoice_items_3 = create(:invoice_item, item: item2, invoice: invoice_3, quantity: 1, unit_price: 200)
-      transaction = create(:transaction, invoice: invoice_1, result: "success")
-      transaction = create(:transaction, invoice: invoice_2, result: "success")
-      transaction = create(:transaction, invoice: invoice_3, result: "success")
+  context "business logic methods" do
+    context "best day" do
+      it "can return the day with the most sales for an item" do
+        create_date_1 = "2017-01-01T00:00:00.000Z"
+        create_date_2 = "2017-02-02T00:00:00.000Z"
+        create_date_3 = "2017-03-03T00:00:00.000Z"
+        item = create(:item)
+        invoice_items = create_list(:invoice_item, 2, quantity: 3,
+          item: item,
+          invoice: create(:invoice, created_at: create_date_1)
+        )
+        invoice_items = create_list(:invoice_item, 2, quantity: 2,
+          item: item,
+          invoice: create(:invoice, created_at: create_date_2)
+        )
 
-      get "/api/v1/items/most_revenue?quantity=1"
+        get "/api/v1/items/#{item.id}/best_day"
+        results = JSON.parse(response.body)
 
-      result = JSON.parse(response.body)
+        expect(response).to be_success
+        expect(results['best_day']).to eq(create_date_1)
+        expect(results['best_day']).to_not eq(create_date_2)
+      end
 
-      expect(response).to be_success
-      expect(result.first["id"]).to eq(item1.id)
-    end
+      it "can return the most recent day when two days are tied with the most sales for an item" do
+        create_date_1 = "2017-01-01T00:00:00.000Z"
+        create_date_2 = "2017-02-02T00:00:00.000Z"
+        create_date_3 = "2017-03-03T00:00:00.000Z"
+        item = create(:item)
+        invoice_items = create_list(:invoice_item, 2, quantity: 3,
+          item: item,
+          invoice: create(:invoice, created_at: create_date_1)
+        )
+        invoice_items = create_list(:invoice_item, 3, quantity: 2,
+          item: item,
+          invoice: create(:invoice, created_at: create_date_2)
+        )
+        invoice_items = create_list(:invoice_item, 2,
+          item: item,
+          invoice: create(:invoice, created_at: create_date_3)
+        )
+
+        get "/api/v1/items/#{item.id}/best_day"
+        results = JSON.parse(response.body)
+
+        expect(response).to be_success
+        expect(results['best_day']).to eq(create_date_2)
+        expect(results['best_day']).to_not eq(create_date_1)
+        expect(results['best_day']).to_not eq(create_date_3)
+      end
+      
+      it "returns the top x items ranked by total revenue generated" do
+        item1 = create(:item)
+        item2 = create(:item)
+        invoice_1, invoice_2, invoice_3 = create_list(:invoice, 3)
+        invoice_items_1 = create(:invoice_item, item: item1, invoice: invoice_1, quantity: 5, unit_price: 500)
+        invoice_items_2 = create(:invoice_item, item: item2, invoice: invoice_2, quantity: 2, unit_price: 200)
+        invoice_items_3 = create(:invoice_item, item: item2, invoice: invoice_3, quantity: 1, unit_price: 200)
+        transaction = create(:transaction, invoice: invoice_1, result: "success")
+        transaction = create(:transaction, invoice: invoice_2, result: "success")
+        transaction = create(:transaction, invoice: invoice_3, result: "success")
+
+        get "/api/v1/items/most_revenue?quantity=1"
+
+        result = JSON.parse(response.body)
+
+        expect(response).to be_success
+        expect(result.first["id"]).to eq(item1.id)
+      end
   end
-
+    
 end
