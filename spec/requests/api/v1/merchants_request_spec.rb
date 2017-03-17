@@ -254,50 +254,58 @@ describe "Merchants API" do
       expect(result["total_revenue"]).to eq("100.0")
     end
 
-    # context "most_revenue" do
-    #   it "can get the top merchant by revenue" do
-    #     merchants = create_list(:merchant, 5)
-    #     2.times do
-    #       create_list(:invoice_item, 5, invoice: create(:invoice, merchant: merchants[0]))
-    #       create_list(:invoice_item, 4, invoice: create(:invoice, merchant: merchants[1]))
-    #       create_list(:invoice_item, 3, invoice: create(:invoice, merchant: merchants[2]))
-    #       create_list(:invoice_item, 2, invoice: create(:invoice, merchant: merchants[3]))
-    #       create_list(:invoice_item, 1, invoice: create(:invoice, merchant: merchants[4]))
-    #     end
+    context "most_revenue" do
+      it "can get the top merchant by revenue" do
+        merchants = create_list(:merchant, 5)
+        merchants.each do |merchant|
+          invoice = create(:invoice, merchant: merchant)
+          create(:transaction, invoice: invoice)
+        end
+        2.times do
+          create_list(:invoice_item, 5, invoice: Invoice.first)
+          create_list(:invoice_item, 4, invoice: Invoice.second)
+          create_list(:invoice_item, 3, invoice: Invoice.third)
+          create_list(:invoice_item, 2, invoice: Invoice.fourth)
+          create_list(:invoice_item, 1, invoice: Invoice.fifth)
+        end
 
-    #     get "/api/v1/merchants/most_revenue?quantity=1"
+        get "/api/v1/merchants/most_revenue?quantity=1"
 
-    #     results = JSON.parse(response.body)
+        results = JSON.parse(response.body)
 
-    #     expect(response).to be_success
-    #     expect(results.count).to eq(1)
-    #     expect(results.first["id"]).to eq(merchants[0].id)
-    #     expect(results.first["name"]).to eq(merchants[0].name)
-    #   end
+        expect(response).to be_success
+        expect(results.count).to eq(1)
+        expect(results.first["id"]).to eq(merchants.first.id)
+        expect(results.first["name"]).to eq(merchants.first.name)
+      end
 
-    #   it "can get the top three merchants by revenue" do
-    #     merchants = create_list(:merchant, 5)
-    #     2.times do
-    #       create_list(:invoice_item, 5, invoice: create(:invoice, merchant: merchants[0]))
-    #       create_list(:invoice_item, 4, invoice: create(:invoice, merchant: merchants[1]))
-    #       create_list(:invoice_item, 3, invoice: create(:invoice, merchant: merchants[2]))
-    #       create_list(:invoice_item, 2, invoice: create(:invoice, merchant: merchants[3]))
-    #       create_list(:invoice_item, 1, invoice: create(:invoice, merchant: merchants[4]))
-    #     end
+      it "can get the top three merchants by revenue" do
+        merchants = create_list(:merchant, 5)
+        merchants.each do |merchant|
+          invoice = create(:invoice, merchant: merchant)
+          create(:transaction, invoice: invoice)
+        end
+        2.times do
+          create_list(:invoice_item, 5, invoice: Invoice.first)
+          create_list(:invoice_item, 4, invoice: Invoice.second)
+          create_list(:invoice_item, 3, invoice: Invoice.third)
+          create_list(:invoice_item, 2, invoice: Invoice.fourth)
+          create_list(:invoice_item, 1, invoice: Invoice.fifth)
+        end
 
-    #     get "/api/v1/merchants/most_revenue?quantity=3"
+        get "/api/v1/merchants/most_revenue?quantity=3"
 
-    #     results = JSON.parse(response.body)
+        results = JSON.parse(response.body)
 
-    #     expect(response).to be_success
-    #     expect(results.count).to eq(3)
-    #     expect(results.first["id"]).to eq(merchants[0].id)
-    #     expect(results.first["name"]).to eq(merchants[0].name)
-    #     expect(results.second["id"]).to eq(merchants[1].id)
-    #     expect(results.second["name"]).to eq(merchants[1].name)
-    #     expect(results.third["id"]).to eq(merchants[2].id)
-    #     expect(results.third["name"]).to eq(merchants[2].name)
-    #   end
-    # end
+        expect(response).to be_success
+        expect(results.count).to eq(3)
+        expect(results.first["id"]).to eq(merchants.first.id)
+        expect(results.first["name"]).to eq(merchants.first.name)
+        expect(results.second["id"]).to eq(merchants.second.id)
+        expect(results.second["name"]).to eq(merchants.second.name)
+        expect(results.third["id"]).to eq(merchants.third.id)
+        expect(results.third["name"]).to eq(merchants.third.name)
+      end
+    end
   end
 end
