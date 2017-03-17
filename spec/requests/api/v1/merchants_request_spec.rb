@@ -234,25 +234,23 @@ describe "Merchants API" do
     it "can get the total revenue for all merchants" do
       date_1 = "2017-01-01T00:00:00.000Z"
       date_2 = "2017-02-02T00:00:00.000Z"
-      invoice1 = create(:invoice, created_at: date_1)
-      invoice2 = create(:invoice, created_at: date_2)
-      create_list(:invoice_item, 8, invoice: invoice1)
-      create_list(:invoice_item, 8, invoice: invoice2)
-      create_list(:invoice_item, 4, invoice: invoice1, quantity: 2, unit_price: "20.00")
-      create_list(:invoice_item, 4, invoice: invoice2, quantity: 2, unit_price: "20.00")
-      Invoice.all.each_slice(4) do |invoice1, invoice2, invoice3, invoice4|
-        create(:transaction, invoice: invoice1, result: "success")
-        create(:transaction, invoice: invoice2, result: "success")
-        create(:transaction, invoice: invoice3, result: "success")
-        create(:transaction, invoice: invoice4, result: "failed")
+      create_list(:invoice, 2, created_at: date_1)
+      create_list(:invoice, 2, created_at: date_2)
+      Invoice.all.each do |invoice|
+        create(:invoice_item, invoice: invoice)
+        create(:invoice_item, invoice: invoice, quantity: 2, unit_price: "20.00")
       end
+      create(:transaction, invoice: Invoice.first, result: "success")
+      create(:transaction, invoice: Invoice.second, result: "success")
+      create(:transaction, invoice: Invoice.third, result: "success")
+      create(:transaction, invoice: Invoice.fourth, result: "failed")
 
       get "/api/v1/merchants/revenue?date=#{date_1}"
 
       result = JSON.parse(response.body)
 
       expect(response).to be_success
-      expect(result["total_revenue"]).to eq("180.0")
+      expect(result["total_revenue"]).to eq("100.0")
     end
   end
 end
