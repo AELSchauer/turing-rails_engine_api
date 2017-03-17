@@ -1,14 +1,14 @@
 {
   "RSpec": {
     "coverage": {
-      "/Users/ashleyschauer/Documents/turing/projects/3-module-projects/rails_engine/spec/models/customer_spec.rb": [
+      "/Users/alexfosco/rails_engine/spec/models/customer_spec.rb": [
         1,
         null,
         1,
         1,
         null
       ],
-      "/Users/ashleyschauer/Documents/turing/projects/3-module-projects/rails_engine/spec/rails_helper.rb": [
+      "/Users/alexfosco/rails_engine/spec/rails_helper.rb": [
         null,
         1,
         1,
@@ -68,14 +68,14 @@
         null,
         null
       ],
-      "/Users/ashleyschauer/Documents/turing/projects/3-module-projects/rails_engine/config/environment.rb": [
+      "/Users/alexfosco/rails_engine/config/environment.rb": [
         null,
         1,
         null,
         null,
         1
       ],
-      "/Users/ashleyschauer/Documents/turing/projects/3-module-projects/rails_engine/config/application.rb": [
+      "/Users/alexfosco/rails_engine/config/application.rb": [
         1,
         null,
         1,
@@ -107,12 +107,12 @@
         null,
         null
       ],
-      "/Users/ashleyschauer/Documents/turing/projects/3-module-projects/rails_engine/config/boot.rb": [
+      "/Users/alexfosco/rails_engine/config/boot.rb": [
         1,
         null,
         1
       ],
-      "/Users/ashleyschauer/Documents/turing/projects/3-module-projects/rails_engine/config/environments/test.rb": [
+      "/Users/alexfosco/rails_engine/config/environments/test.rb": [
         1,
         null,
         null,
@@ -156,7 +156,7 @@
         null,
         null
       ],
-      "/Users/ashleyschauer/Documents/turing/projects/3-module-projects/rails_engine/config/initializers/application_controller_renderer.rb": [
+      "/Users/alexfosco/rails_engine/config/initializers/application_controller_renderer.rb": [
         null,
         null,
         null,
@@ -164,25 +164,7 @@
         null,
         null
       ],
-      "/Users/ashleyschauer/Documents/turing/projects/3-module-projects/rails_engine/config/initializers/backtrace_silencers.rb": [
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
-      ],
-      "/Users/ashleyschauer/Documents/turing/projects/3-module-projects/rails_engine/config/initializers/cors.rb": [
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
+      "/Users/alexfosco/rails_engine/config/initializers/backtrace_silencers.rb": [
         null,
         null,
         null,
@@ -191,13 +173,31 @@
         null,
         null
       ],
-      "/Users/ashleyschauer/Documents/turing/projects/3-module-projects/rails_engine/config/initializers/filter_parameter_logging.rb": [
+      "/Users/alexfosco/rails_engine/config/initializers/cors.rb": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "/Users/alexfosco/rails_engine/config/initializers/filter_parameter_logging.rb": [
         null,
         null,
         null,
         1
       ],
-      "/Users/ashleyschauer/Documents/turing/projects/3-module-projects/rails_engine/config/initializers/inflections.rb": [
+      "/Users/alexfosco/rails_engine/config/initializers/inflections.rb": [
         null,
         null,
         null,
@@ -215,13 +215,13 @@
         null,
         null
       ],
-      "/Users/ashleyschauer/Documents/turing/projects/3-module-projects/rails_engine/config/initializers/mime_types.rb": [
+      "/Users/alexfosco/rails_engine/config/initializers/mime_types.rb": [
         null,
         null,
         null,
         null
       ],
-      "/Users/ashleyschauer/Documents/turing/projects/3-module-projects/rails_engine/config/initializers/new_framework_defaults.rb": [
+      "/Users/alexfosco/rails_engine/config/initializers/new_framework_defaults.rb": [
         null,
         null,
         null,
@@ -241,7 +241,7 @@
         null,
         1
       ],
-      "/Users/ashleyschauer/Documents/turing/projects/3-module-projects/rails_engine/config/initializers/wrap_parameters.rb": [
+      "/Users/alexfosco/rails_engine/config/initializers/wrap_parameters.rb": [
         null,
         null,
         null,
@@ -257,7 +257,7 @@
         null,
         null
       ],
-      "/Users/ashleyschauer/Documents/turing/projects/3-module-projects/rails_engine/spec/factories/customers.rb": [
+      "/Users/alexfosco/rails_engine/spec/factories/customers.rb": [
         1,
         null,
         1,
@@ -267,7 +267,7 @@
         null,
         null
       ],
-      "/Users/ashleyschauer/Documents/turing/projects/3-module-projects/rails_engine/spec/factories/invoice_items.rb": [
+      "/Users/alexfosco/rails_engine/spec/factories/invoice_items.rb": [
         1,
         1,
         1,
@@ -277,7 +277,7 @@
         null,
         null
       ],
-      "/Users/ashleyschauer/Documents/turing/projects/3-module-projects/rails_engine/spec/factories/invoices.rb": [
+      "/Users/alexfosco/rails_engine/spec/factories/invoices.rb": [
         1,
         1,
         1,
@@ -303,7 +303,7 @@
         null,
         null
       ],
-      "/Users/ashleyschauer/Documents/turing/projects/3-module-projects/rails_engine/spec/factories/items.rb": [
+      "/Users/alexfosco/rails_engine/spec/factories/items.rb": [
         1,
         1,
         1,
@@ -313,7 +313,7 @@
         null,
         null
       ],
-      "/Users/ashleyschauer/Documents/turing/projects/3-module-projects/rails_engine/spec/factories/merchants.rb": [
+      "/Users/alexfosco/rails_engine/spec/factories/merchants.rb": [
         1,
         null,
         1,
@@ -322,7 +322,7 @@
         null,
         null
       ],
-      "/Users/ashleyschauer/Documents/turing/projects/3-module-projects/rails_engine/spec/factories/transactions.rb": [
+      "/Users/alexfosco/rails_engine/spec/factories/transactions.rb": [
         1,
         1,
         1,
@@ -332,7 +332,7 @@
         null,
         null
       ],
-      "/Users/ashleyschauer/Documents/turing/projects/3-module-projects/rails_engine/config/routes.rb": [
+      "/Users/alexfosco/rails_engine/config/routes.rb": [
         1,
         null,
         1,
@@ -389,55 +389,34 @@
         1,
         1,
         1,
-        null,
         1,
-        1,
-        1,
-        1,
-        null,
         null,
         1,
         1,
         1,
         1,
         null,
+        null,
         1,
-        1,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
-      ],
-      "/Users/ashleyschauer/Documents/turing/projects/3-module-projects/rails_engine/spec/support/factory_girl.rb": [
-        1,
-        1,
-        null
-      ],
-      "/Users/ashleyschauer/Documents/turing/projects/3-module-projects/rails_engine/app/models/customer.rb": [
         1,
         1,
         1,
         null,
         1,
         1,
+        null,
+        null,
+        null,
+        null,
         null,
         null
       ],
-      "/Users/ashleyschauer/Documents/turing/projects/3-module-projects/rails_engine/app/models/application_record.rb": [
+      "/Users/alexfosco/rails_engine/spec/support/factory_girl.rb": [
         1,
         1,
         null
       ],
-      "/Users/ashleyschauer/Documents/turing/projects/3-module-projects/rails_engine/spec/models/invoice_item_spec.rb": [
-        1,
-        null,
-        1,
-        1,
-        null
-      ],
-      "/Users/ashleyschauer/Documents/turing/projects/3-module-projects/rails_engine/app/models/invoice_item.rb": [
+      "/Users/alexfosco/rails_engine/app/models/customer.rb": [
         1,
         1,
         1,
@@ -447,14 +426,36 @@
         null,
         null
       ],
-      "/Users/ashleyschauer/Documents/turing/projects/3-module-projects/rails_engine/spec/models/invoice_spec.rb": [
+      "/Users/alexfosco/rails_engine/app/models/application_record.rb": [
+        1,
+        1,
+        null
+      ],
+      "/Users/alexfosco/rails_engine/spec/models/invoice_item_spec.rb": [
         1,
         null,
         1,
         1,
         null
       ],
-      "/Users/ashleyschauer/Documents/turing/projects/3-module-projects/rails_engine/app/models/invoice.rb": [
+      "/Users/alexfosco/rails_engine/app/models/invoice_item.rb": [
+        1,
+        1,
+        1,
+        null,
+        1,
+        1,
+        null,
+        null
+      ],
+      "/Users/alexfosco/rails_engine/spec/models/invoice_spec.rb": [
+        1,
+        null,
+        1,
+        1,
+        null
+      ],
+      "/Users/alexfosco/rails_engine/app/models/invoice.rb": [
         1,
         1,
         1,
@@ -467,14 +468,14 @@
         null,
         null
       ],
-      "/Users/ashleyschauer/Documents/turing/projects/3-module-projects/rails_engine/spec/models/item_spec.rb": [
+      "/Users/alexfosco/rails_engine/spec/models/item_spec.rb": [
         1,
         null,
         1,
         1,
         null
       ],
-      "/Users/ashleyschauer/Documents/turing/projects/3-module-projects/rails_engine/app/models/item.rb": [
+      "/Users/alexfosco/rails_engine/app/models/item.rb": [
         1,
         1,
         1,
@@ -517,14 +518,14 @@
         null,
         null
       ],
-      "/Users/ashleyschauer/Documents/turing/projects/3-module-projects/rails_engine/spec/models/merchant_spec.rb": [
+      "/Users/alexfosco/rails_engine/spec/models/merchant_spec.rb": [
         1,
         null,
         1,
         1,
         null
       ],
-      "/Users/ashleyschauer/Documents/turing/projects/3-module-projects/rails_engine/app/models/merchant.rb": [
+      "/Users/alexfosco/rails_engine/app/models/merchant.rb": [
         1,
         1,
         1,
@@ -592,25 +593,33 @@
         null,
         null,
         null,
-        null
-      ],
-      "/Users/ashleyschauer/Documents/turing/projects/3-module-projects/rails_engine/spec/models/transaction_spec.rb": [
-        1,
         null,
         1,
-        1,
-        null
-      ],
-      "/Users/ashleyschauer/Documents/turing/projects/3-module-projects/rails_engine/app/models/transaction.rb": [
-        1,
-        1,
         null,
-        1,
+        null,
+        null,
+        null,
         1,
         null,
         null
       ],
-      "/Users/ashleyschauer/Documents/turing/projects/3-module-projects/rails_engine/spec/requests/api/v1/customers_request_spec.rb": [
+      "/Users/alexfosco/rails_engine/spec/models/transaction_spec.rb": [
+        1,
+        null,
+        1,
+        1,
+        null
+      ],
+      "/Users/alexfosco/rails_engine/app/models/transaction.rb": [
+        1,
+        1,
+        null,
+        1,
+        1,
+        null,
+        null
+      ],
+      "/Users/alexfosco/rails_engine/spec/requests/api/v1/customers_request_spec.rb": [
         1,
         null,
         1,
@@ -875,7 +884,7 @@
         null,
         null
       ],
-      "/Users/ashleyschauer/Documents/turing/projects/3-module-projects/rails_engine/spec/requests/api/v1/invoice_items_request_spec.rb": [
+      "/Users/alexfosco/rails_engine/spec/requests/api/v1/invoice_items_request_spec.rb": [
         1,
         null,
         1,
@@ -1043,7 +1052,7 @@
         null,
         null
       ],
-      "/Users/ashleyschauer/Documents/turing/projects/3-module-projects/rails_engine/spec/requests/api/v1/invoices_request_spec.rb": [
+      "/Users/alexfosco/rails_engine/spec/requests/api/v1/invoices_request_spec.rb": [
         1,
         null,
         1,
@@ -1340,7 +1349,7 @@
         null,
         null
       ],
-      "/Users/ashleyschauer/Documents/turing/projects/3-module-projects/rails_engine/spec/requests/api/v1/items_request_spec.rb": [
+      "/Users/alexfosco/rails_engine/spec/requests/api/v1/items_request_spec.rb": [
         1,
         null,
         1,
@@ -1716,7 +1725,7 @@
         null,
         null
       ],
-      "/Users/ashleyschauer/Documents/turing/projects/3-module-projects/rails_engine/spec/requests/api/v1/merchants_request_spec.rb": [
+      "/Users/alexfosco/rails_engine/spec/requests/api/v1/merchants_request_spec.rb": [
         1,
         null,
         1,
@@ -1973,9 +1982,29 @@
         1,
         null,
         null,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        null,
+        1,
+        null,
+        1,
+        null,
+        1,
+        1,
+        null,
+        null,
         null
       ],
-      "/Users/ashleyschauer/Documents/turing/projects/3-module-projects/rails_engine/spec/requests/api/v1/transactions_request_spec.rb": [
+      "/Users/alexfosco/rails_engine/spec/requests/api/v1/transactions_request_spec.rb": [
         1,
         null,
         1,
@@ -2236,7 +2265,7 @@
         null,
         null
       ],
-      "/Users/ashleyschauer/Documents/turing/projects/3-module-projects/rails_engine/app/controllers/api/v1/customers_controller.rb": [
+      "/Users/alexfosco/rails_engine/app/controllers/api/v1/customers_controller.rb": [
         1,
         1,
         1,
@@ -2247,16 +2276,16 @@
         null,
         null
       ],
-      "/Users/ashleyschauer/Documents/turing/projects/3-module-projects/rails_engine/app/controllers/application_controller.rb": [
+      "/Users/alexfosco/rails_engine/app/controllers/application_controller.rb": [
         1,
         null
       ],
-      "/Users/ashleyschauer/Documents/turing/projects/3-module-projects/rails_engine/app/serializers/customer_serializer.rb": [
+      "/Users/alexfosco/rails_engine/app/serializers/customer_serializer.rb": [
         1,
         1,
         null
       ],
-      "/Users/ashleyschauer/Documents/turing/projects/3-module-projects/rails_engine/app/controllers/api/v1/customers/find_controller.rb": [
+      "/Users/alexfosco/rails_engine/app/controllers/api/v1/customers/find_controller.rb": [
         1,
         null,
         1,
@@ -2275,50 +2304,50 @@
         null,
         null
       ],
-      "/Users/ashleyschauer/Documents/turing/projects/3-module-projects/rails_engine/app/controllers/api/v1/customers/random_controller.rb": [
+      "/Users/alexfosco/rails_engine/app/controllers/api/v1/customers/random_controller.rb": [
         1,
         1,
         1,
         null,
         null
       ],
-      "/Users/ashleyschauer/Documents/turing/projects/3-module-projects/rails_engine/app/controllers/api/v1/customers/transactions_controller.rb": [
+      "/Users/alexfosco/rails_engine/app/controllers/api/v1/customers/transactions_controller.rb": [
         1,
         1,
         1,
         null,
         null
       ],
-      "/Users/ashleyschauer/Documents/turing/projects/3-module-projects/rails_engine/app/serializers/transaction_serializer.rb": [
+      "/Users/alexfosco/rails_engine/app/serializers/transaction_serializer.rb": [
         1,
         1,
         null
       ],
-      "/Users/ashleyschauer/Documents/turing/projects/3-module-projects/rails_engine/app/controllers/api/v1/customers/invoices_controller.rb": [
+      "/Users/alexfosco/rails_engine/app/controllers/api/v1/customers/invoices_controller.rb": [
         1,
         1,
         1,
         null,
         null
       ],
-      "/Users/ashleyschauer/Documents/turing/projects/3-module-projects/rails_engine/app/serializers/invoice_serializer.rb": [
+      "/Users/alexfosco/rails_engine/app/serializers/invoice_serializer.rb": [
         1,
         1,
         null
       ],
-      "/Users/ashleyschauer/Documents/turing/projects/3-module-projects/rails_engine/app/controllers/api/v1/customers/favorite_merchant_controller.rb": [
+      "/Users/alexfosco/rails_engine/app/controllers/api/v1/customers/favorite_merchant_controller.rb": [
         1,
         1,
         1,
         null,
         null
       ],
-      "/Users/ashleyschauer/Documents/turing/projects/3-module-projects/rails_engine/app/serializers/merchant_serializer.rb": [
+      "/Users/alexfosco/rails_engine/app/serializers/merchant_serializer.rb": [
         1,
         1,
         null
       ],
-      "/Users/ashleyschauer/Documents/turing/projects/3-module-projects/rails_engine/app/controllers/api/v1/invoice_items_controller.rb": [
+      "/Users/alexfosco/rails_engine/app/controllers/api/v1/invoice_items_controller.rb": [
         1,
         1,
         1,
@@ -2329,12 +2358,12 @@
         null,
         null
       ],
-      "/Users/ashleyschauer/Documents/turing/projects/3-module-projects/rails_engine/app/serializers/invoice_item_serializer.rb": [
+      "/Users/alexfosco/rails_engine/app/serializers/invoice_item_serializer.rb": [
         1,
         1,
         null
       ],
-      "/Users/ashleyschauer/Documents/turing/projects/3-module-projects/rails_engine/app/controllers/api/v1/invoice_items/find_controller.rb": [
+      "/Users/alexfosco/rails_engine/app/controllers/api/v1/invoice_items/find_controller.rb": [
         1,
         null,
         1,
@@ -2353,22 +2382,14 @@
         null,
         null
       ],
-      "/Users/ashleyschauer/Documents/turing/projects/3-module-projects/rails_engine/app/controllers/api/v1/invoice_items/random_controller.rb": [
+      "/Users/alexfosco/rails_engine/app/controllers/api/v1/invoice_items/random_controller.rb": [
         1,
         1,
         1,
         null,
         null
       ],
-      "/Users/ashleyschauer/Documents/turing/projects/3-module-projects/rails_engine/app/controllers/api/v1/invoice_items/invoice_controller.rb": [
-        1,
-        1,
-        1,
-        1,
-        null,
-        null
-      ],
-      "/Users/ashleyschauer/Documents/turing/projects/3-module-projects/rails_engine/app/controllers/api/v1/invoice_items/item_controller.rb": [
+      "/Users/alexfosco/rails_engine/app/controllers/api/v1/invoice_items/invoice_controller.rb": [
         1,
         1,
         1,
@@ -2376,23 +2397,31 @@
         null,
         null
       ],
-      "/Users/ashleyschauer/Documents/turing/projects/3-module-projects/rails_engine/app/serializers/item_serializer.rb": [
+      "/Users/alexfosco/rails_engine/app/controllers/api/v1/invoice_items/item_controller.rb": [
         1,
         1,
-        null
-      ],
-      "/Users/ashleyschauer/Documents/turing/projects/3-module-projects/rails_engine/app/controllers/api/v1/invoices_controller.rb": [
-        1,
-        1,
-        1,
-        null,
-        null,
         1,
         1,
         null,
         null
       ],
-      "/Users/ashleyschauer/Documents/turing/projects/3-module-projects/rails_engine/app/controllers/api/v1/invoices/find_controller.rb": [
+      "/Users/alexfosco/rails_engine/app/serializers/item_serializer.rb": [
+        1,
+        1,
+        null
+      ],
+      "/Users/alexfosco/rails_engine/app/controllers/api/v1/invoices_controller.rb": [
+        1,
+        1,
+        1,
+        null,
+        null,
+        1,
+        1,
+        null,
+        null
+      ],
+      "/Users/alexfosco/rails_engine/app/controllers/api/v1/invoices/find_controller.rb": [
         1,
         null,
         1,
@@ -2411,49 +2440,49 @@
         null,
         null
       ],
-      "/Users/ashleyschauer/Documents/turing/projects/3-module-projects/rails_engine/app/controllers/api/v1/invoices/random_controller.rb": [
+      "/Users/alexfosco/rails_engine/app/controllers/api/v1/invoices/random_controller.rb": [
         1,
         1,
         1,
         null,
         null
       ],
-      "/Users/ashleyschauer/Documents/turing/projects/3-module-projects/rails_engine/app/controllers/api/v1/invoices/customer_controller.rb": [
+      "/Users/alexfosco/rails_engine/app/controllers/api/v1/invoices/customer_controller.rb": [
         1,
         1,
         1,
         null,
         null
       ],
-      "/Users/ashleyschauer/Documents/turing/projects/3-module-projects/rails_engine/app/controllers/api/v1/invoices/invoice_items_controller.rb": [
+      "/Users/alexfosco/rails_engine/app/controllers/api/v1/invoices/invoice_items_controller.rb": [
         1,
         1,
         1,
         null,
         null
       ],
-      "/Users/ashleyschauer/Documents/turing/projects/3-module-projects/rails_engine/app/controllers/api/v1/invoices/items_controller.rb": [
+      "/Users/alexfosco/rails_engine/app/controllers/api/v1/invoices/items_controller.rb": [
         1,
         1,
         1,
         null,
         null
       ],
-      "/Users/ashleyschauer/Documents/turing/projects/3-module-projects/rails_engine/app/controllers/api/v1/invoices/merchant_controller.rb": [
+      "/Users/alexfosco/rails_engine/app/controllers/api/v1/invoices/merchant_controller.rb": [
         1,
         1,
         1,
         null,
         null
       ],
-      "/Users/ashleyschauer/Documents/turing/projects/3-module-projects/rails_engine/app/controllers/api/v1/invoices/transactions_controller.rb": [
+      "/Users/alexfosco/rails_engine/app/controllers/api/v1/invoices/transactions_controller.rb": [
         1,
         1,
         1,
         null,
         null
       ],
-      "/Users/ashleyschauer/Documents/turing/projects/3-module-projects/rails_engine/app/controllers/api/v1/items_controller.rb": [
+      "/Users/alexfosco/rails_engine/app/controllers/api/v1/items_controller.rb": [
         1,
         1,
         1,
@@ -2464,7 +2493,7 @@
         null,
         null
       ],
-      "/Users/ashleyschauer/Documents/turing/projects/3-module-projects/rails_engine/app/controllers/api/v1/items/find_controller.rb": [
+      "/Users/alexfosco/rails_engine/app/controllers/api/v1/items/find_controller.rb": [
         1,
         null,
         1,
@@ -2483,21 +2512,21 @@
         null,
         null
       ],
-      "/Users/ashleyschauer/Documents/turing/projects/3-module-projects/rails_engine/app/controllers/api/v1/items/random_controller.rb": [
+      "/Users/alexfosco/rails_engine/app/controllers/api/v1/items/random_controller.rb": [
         1,
         1,
         1,
         null,
         null
       ],
-      "/Users/ashleyschauer/Documents/turing/projects/3-module-projects/rails_engine/app/controllers/api/v1/items/invoice_items_controller.rb": [
+      "/Users/alexfosco/rails_engine/app/controllers/api/v1/items/invoice_items_controller.rb": [
         1,
         1,
         1,
         null,
         null
       ],
-      "/Users/ashleyschauer/Documents/turing/projects/3-module-projects/rails_engine/app/controllers/api/v1/items/merchant_controller.rb": [
+      "/Users/alexfosco/rails_engine/app/controllers/api/v1/items/merchant_controller.rb": [
         1,
         1,
         1,
@@ -2505,7 +2534,7 @@
         null,
         null
       ],
-      "/Users/ashleyschauer/Documents/turing/projects/3-module-projects/rails_engine/app/controllers/api/v1/items/best_day_controller.rb": [
+      "/Users/alexfosco/rails_engine/app/controllers/api/v1/items/best_day_controller.rb": [
         1,
         1,
         2,
@@ -2514,14 +2543,14 @@
         null,
         null
       ],
-      "/Users/ashleyschauer/Documents/turing/projects/3-module-projects/rails_engine/app/controllers/api/v1/items/most_revenue_controller.rb": [
+      "/Users/alexfosco/rails_engine/app/controllers/api/v1/items/most_revenue_controller.rb": [
         1,
         1,
         1,
         null,
         null
       ],
-      "/Users/ashleyschauer/Documents/turing/projects/3-module-projects/rails_engine/app/controllers/api/v1/merchants_controller.rb": [
+      "/Users/alexfosco/rails_engine/app/controllers/api/v1/merchants_controller.rb": [
         1,
         1,
         1,
@@ -2532,7 +2561,7 @@
         null,
         null
       ],
-      "/Users/ashleyschauer/Documents/turing/projects/3-module-projects/rails_engine/app/controllers/api/v1/merchants/find_controller.rb": [
+      "/Users/alexfosco/rails_engine/app/controllers/api/v1/merchants/find_controller.rb": [
         1,
         null,
         1,
@@ -2551,28 +2580,28 @@
         null,
         null
       ],
-      "/Users/ashleyschauer/Documents/turing/projects/3-module-projects/rails_engine/app/controllers/api/v1/merchants/random_controller.rb": [
+      "/Users/alexfosco/rails_engine/app/controllers/api/v1/merchants/random_controller.rb": [
         1,
         1,
         1,
         null,
         null
       ],
-      "/Users/ashleyschauer/Documents/turing/projects/3-module-projects/rails_engine/app/controllers/api/v1/merchants/items_controller.rb": [
+      "/Users/alexfosco/rails_engine/app/controllers/api/v1/merchants/items_controller.rb": [
         1,
         1,
         1,
         null,
         null
       ],
-      "/Users/ashleyschauer/Documents/turing/projects/3-module-projects/rails_engine/app/controllers/api/v1/merchants/invoices_controller.rb": [
+      "/Users/alexfosco/rails_engine/app/controllers/api/v1/merchants/invoices_controller.rb": [
         1,
         1,
         1,
         null,
         null
       ],
-      "/Users/ashleyschauer/Documents/turing/projects/3-module-projects/rails_engine/app/controllers/api/v1/merchants/revenue_controller.rb": [
+      "/Users/alexfosco/rails_engine/app/controllers/api/v1/merchants/revenue_controller.rb": [
         1,
         1,
         1,
@@ -2583,7 +2612,14 @@
         null,
         null
       ],
-      "/Users/ashleyschauer/Documents/turing/projects/3-module-projects/rails_engine/app/controllers/api/v1/transactions_controller.rb": [
+      "/Users/alexfosco/rails_engine/app/controllers/api/v1/merchants/most_items_controller.rb": [
+        1,
+        1,
+        1,
+        null,
+        null
+      ],
+      "/Users/alexfosco/rails_engine/app/controllers/api/v1/transactions_controller.rb": [
         1,
         1,
         1,
@@ -2594,7 +2630,7 @@
         null,
         null
       ],
-      "/Users/ashleyschauer/Documents/turing/projects/3-module-projects/rails_engine/app/controllers/api/v1/transactions/find_controller.rb": [
+      "/Users/alexfosco/rails_engine/app/controllers/api/v1/transactions/find_controller.rb": [
         1,
         null,
         1,
@@ -2613,14 +2649,14 @@
         null,
         null
       ],
-      "/Users/ashleyschauer/Documents/turing/projects/3-module-projects/rails_engine/app/controllers/api/v1/transactions/random_controller.rb": [
+      "/Users/alexfosco/rails_engine/app/controllers/api/v1/transactions/random_controller.rb": [
         1,
         1,
         1,
         null,
         null
       ],
-      "/Users/ashleyschauer/Documents/turing/projects/3-module-projects/rails_engine/app/controllers/api/v1/transactions/invoice_controller.rb": [
+      "/Users/alexfosco/rails_engine/app/controllers/api/v1/transactions/invoice_controller.rb": [
         1,
         1,
         1,
@@ -2629,6 +2665,6 @@
         null
       ]
     },
-    "timestamp": 1489714616
+    "timestamp": 1489725345
   }
 }

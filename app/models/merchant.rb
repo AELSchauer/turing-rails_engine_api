@@ -67,6 +67,14 @@ class Merchant < ApplicationRecord
         # results = ActiveRecord::Base.connection.execute(query).first
   end
 
+  def self.most_items(quantity)
+    joins(invoices: [:transactions, :invoice_items])
+    .where(transactions: {result: "success"})
+    .group("merchants.id")
+    .order("sum(invoice_items.quantity) DESC")
+    .limit(quantity)
+  end
+
   def self.favorite_customer(id)
     find(id).customers.joins(invoices: [:transactions])
     .where(transactions: {result: "success"})
