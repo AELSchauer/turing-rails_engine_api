@@ -101,8 +101,9 @@ describe "Merchants API" do
 
       expect(response).to be_success
       expect(results.first["id"]).to eq(Merchant.first.id)
-      expect(results.last["id"]).to eq(Merchant.last.id)
-      expect(results.count).to eq(3)
+      expect(results.last["id"]).to_not eq(Merchant.second.id)
+      expect(results.last["id"]).to_not eq(Merchant.third.id)
+      expect(results.count).to eq(1)
     end
 
     it "can find all merchants by their name" do
