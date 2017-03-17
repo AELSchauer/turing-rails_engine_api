@@ -101,8 +101,9 @@ describe "Merchants API" do
 
       expect(response).to be_success
       expect(results.first["id"]).to eq(Merchant.first.id)
-      expect(results.last["id"]).to eq(Merchant.last.id)
-      expect(results.count).to eq(3)
+      expect(results.last["id"]).to_not eq(Merchant.second.id)
+      expect(results.last["id"]).to_not eq(Merchant.third.id)
+      expect(results.count).to eq(1)
     end
 
     it "can find all merchants by their name" do
@@ -231,7 +232,7 @@ describe "Merchants API" do
       expect(result["revenue"]).to eq("130.0")
     end
 
-    it "returns customer that conducted the most total number of successful transactions" do
+    it "returns customer that conducted the highest total number of successful transactions" do
       merchant = create(:merchant)
       customer_1, customer_2, customer_3 = create_list(:customer, 3)
       invoice_1, invoice_2 = create_list(:invoice, 2, customer: customer_1, merchant: merchant)
@@ -247,6 +248,28 @@ describe "Merchants API" do
 
       expect(response).to be_success
       expect(favorite_customer["id"]).to eq(customer_2.id)
+    end
+
+    it "can get the total revenue for all merchants" do
+      date_1 = "2017-01-01T00:00:00.000Z"
+      date_2 = "2017-02-02T00:00:00.000Z"
+      create_list(:invoice, 2, created_at: date_1)
+      create_list(:invoice, 2, created_at: date_2)
+      Invoice.all.each do |invoice|
+        create(:invoice_item, invoice: invoice)
+        create(:invoice_item, invoice: invoice, quantity: 2, unit_price: "20.00")
+      end
+      create(:transaction, invoice: Invoice.first, result: "success")
+      create(:transaction, invoice: Invoice.second, result: "success")
+      create(:transaction, invoice: Invoice.third, result: "success")
+      create(:transaction, invoice: Invoice.fourth, result: "failed")
+
+      get "/api/v1/merchants/revenue?date=#{date_1}"
+
+      result = JSON.parse(response.body)
+
+      expect(response).to be_success
+      expect(result["total_revenue"]).to eq("100.0")
     end
   end
 end
