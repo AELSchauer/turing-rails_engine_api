@@ -1,6 +1,7 @@
 class Merchant < ApplicationRecord
   has_many :items
   has_many :invoices
+  has_many :customers, through: :invoices
 
   def self.random
     order("RANDOM()").first
@@ -64,5 +65,13 @@ class Merchant < ApplicationRecord
         #   WHERE transactions.result = 'success'
         #     AND invoices.created_at = '#{date}'"
         # results = ActiveRecord::Base.connection.execute(query).first
+  end
+
+  def self.favorite_customer(id)
+    find(id).customers.joins(invoices: [:transactions])
+    .where(transactions: {result: "success"})
+    .group('customers.id')
+    .order('count(invoices.merchant_id) DESC')
+    .first
   end
 end
