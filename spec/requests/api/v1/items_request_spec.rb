@@ -349,7 +349,8 @@ describe "Items API" do
         expect(results['best_day']).to_not eq(create_date_1)
         expect(results['best_day']).to_not eq(create_date_3)
       end
-      
+    end
+
       it "returns the top x items ranked by total revenue generated" do
         item1 = create(:item)
         item2 = create(:item)
@@ -369,5 +370,5 @@ describe "Items API" do
         expect(result.first["id"]).to eq(item1.id)
       end
   end
-    
+
 end
